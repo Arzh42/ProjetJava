@@ -30,8 +30,9 @@ public class Date {
 	 *
 	 */
 	public Date(){
-		Scanner sc = new Scanner(System.in);
+		//Scanner sc = new Scanner(System.in);
 		System.out.println("Veuillez rentrer le jour de depart :");
+		Scanner sc = new Scanner(System.in);
 		this.jour = sc.nextInt();
 		System.out.println("Veuillez preciser le mois de depart :");
 		this.mois = sc.nextInt();
