@@ -27,14 +27,21 @@ public class FirstPage extends JPanel {
 		JButton button1 = new JButton("Gestion de Billet");
 		JButton button2 = new JButton("Fucking bitch Stat");
 		button1.addActionListener(new actionGestionBilletPage());
+		button2.addActionListener(new actionStatPage());
 		this.add(button1);
 		this.add(button2);
 	}
 	class actionGestionBilletPage implements ActionListener {
 
 		public void actionPerformed(ActionEvent arg0) {
-			System.out.println("Coucou");
-			mainFen.switchToGestionBillet();
+			mainFen.switchPage("GestionBilletPage");
+			
+		}
+	}
+	class actionStatPage implements ActionListener {
+
+		public void actionPerformed(ActionEvent arg0) {
+			mainFen.switchPage("StatPage");
 			
 		}
 	}

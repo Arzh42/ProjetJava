@@ -42,22 +42,22 @@ public class GestionBilletPage extends JPanel {
 	
 	class actionNouveauBilletPage implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			mainFen.setContentPane(new NouveauBilletPage(mainFen));
+			mainFen.switchPage("NouveauBilletPage");
 		}
 	}
 	class actionConsultationBillet implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			mainFen.setContentPane(new ConsultationBilletPage(mainFen));
+			mainFen.switchPage("ConsultationBilletPage");
 		}
 	}
 	class actionModifBillet implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			mainFen.setContentPane(new ModifBilletPage(mainFen));
+			mainFen.switchPage("ModifBilletPage");
 		}
 	}
 	class actionAnnulationBillet implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			mainFen.setContentPane(new AnnulationBilletPage(mainFen));
+			mainFen.switchPage("AnnulationBilletPage");
 		}
 	}
 }
