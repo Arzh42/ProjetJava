@@ -11,7 +11,7 @@ public class Ville {
 	public void keyboardEntry() {
 		Scanner s = new Scanner(System.in);
 		System.out.println("Enter city name : ");
-		this.name = s.nextLine();
+		this.name = s.next();
 		s.close();
 	}
 	public void Afficher() {

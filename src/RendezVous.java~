@@ -9,7 +9,7 @@ public class RendezVous {
 	}
 	
 	public RendezVous(){
-		this.ville = new Ville();
+		//this.ville = new Ville();
 		System.out.println("Pour aller à ");//+this.ville.getName()+", ");
 		this.date = new Date();
 	}
