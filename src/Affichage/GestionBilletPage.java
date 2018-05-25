@@ -30,9 +30,9 @@ public class GestionBilletPage extends JPanel {
 		JButton button3 = new JButton("Modification Billet");
 		JButton button4 = new JButton("Annulation Billet");
 		button1.addActionListener(new actionNouveauBilletPage());
-		button1.addActionListener(new actionConsultationBillet());
-		button1.addActionListener(new actionModifBillet());
-		button1.addActionListener(new actionAnnulationBillet());
+		button2.addActionListener(new actionConsultationBillet());
+		button3.addActionListener(new actionModifBillet());
+		button4.addActionListener(new actionAnnulationBillet());
 
 		this.add(button1);
 		this.add(button2);

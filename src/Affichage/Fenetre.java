@@ -26,7 +26,7 @@ public class Fenetre extends JFrame {
 		this.mainPanel.setLayout(this.cards);
 		this.mainPanel.add(FirstPage, "FirstPage");
 		this.mainPanel.add(GestionBilletPage, "GestionBilletPage");
-		this.mainPanel.add(StatPage,"Stat");
+		this.mainPanel.add(StatPage,"StatPage");
 		this.mainPanel.add(NouveauBilletPage, "NouveauBilletPage");
 		this.mainPanel.add(ConsultationBilletPage, "ConsultationBilletPage");
 		this.mainPanel.add(ModifBillet, "ModifBilletPage");
