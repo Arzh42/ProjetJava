@@ -30,18 +30,19 @@ public class Date {
 	 *
 	 */
 	public Date(){
+		//Scanner sc = new Scanner(System.in);
+		System.out.println("Veuillez rentrer le jour de depart :");
 		Scanner sc = new Scanner(System.in);
-		System.out.print("Veuillez rentrer le jour de depart :");
 		this.jour = sc.nextInt();
-		System.out.print("Veuillez preciser le mois de depart :");
+		System.out.println("Veuillez preciser le mois de depart :");
 		this.mois = sc.nextInt();
-		System.out.print("Veuillez preciser l'annee du depart :");
+		System.out.println("Veuillez preciser l'annee du depart :");
 		this.annee = sc.nextInt();
-		System.out.print("L'heure du depart voulu :");
+		System.out.println("L'heure du depart voulu :");
 		this.heure = sc.nextInt();
-		System.out.print("Les minutes du depart voulu :");
+		System.out.println("Les minutes du depart voulu :");
 		this.minute = sc.nextInt();
-		System.out.print("Les secondes du depart voulu :");
+		System.out.println("Les secondes du depart voulu :");
 		this.seconde = sc.nextInt();
 		sc.close();
 	}
