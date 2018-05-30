@@ -1,4 +1,4 @@
-import java.util.Scanner;
+import java.io.*;
 
 public class Ville {
 	private String name;
@@ -9,10 +9,10 @@ public class Ville {
 		this.keyboardEntry();
 	}
 	public void keyboardEntry() {
-		Scanner s = new Scanner(System.in);
+		InputStreamReader isr = new InputStreamReader(System.in);
+      	BufferedReader br = new BufferedReader(isr);
 		System.out.println("Enter city name : ");
-		this.name = s.next();
-		s.close();
+		this.name = br.readLine();
 	}
 	public void Afficher() {
 		System.out.println("Bonjour je suis une ville et je m'appelle "+this.name);

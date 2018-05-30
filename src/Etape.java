@@ -6,8 +6,11 @@ public class Etape {
 		this.setRd1(debut);
 		this.setRd2(fin);
 	}
-	public void affichage() {
-		
+	public void Afficher() {
+		System.out.print("Départ: "+rd1.getVille().getName()+" ");
+		rd1.getDate().Afficher();
+		System.out.print("Arrivee: "+rd2.getVille().getName()+" ");
+		rd2.getDate().Afficher();
 	}
 	/**
 	 * @return the rd1

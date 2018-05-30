@@ -9,9 +9,11 @@ public class RendezVous {
 	}
 	
 	public RendezVous(){
-		this.ville = new Ville();
-		System.out.println("Pour aller à ");//+this.ville.getName()+", ");
+		Scanner s = new Scanner(System.in);
 		this.date = new Date();
+		System.out.println("Pour aller à :");
+		this.ville = new Ville();
+		s.close();
 	}
 	/**
 	 *

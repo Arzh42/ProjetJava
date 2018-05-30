@@ -21,7 +21,7 @@ public class Itineraire {
 	public void affichageEtape() {
 		Iterator<Etape> it = this.EtapeSet.iterator();
 		while(it.hasNext()) {
-			it.next().affichage();
+			it.next().Afficher();
 		}
 	}
 	
