@@ -1,12 +1,8 @@
 package Gestion;
 
-/**
- * 
- */
 
 /**
- * @author hugo
- *
+ *Représente un billet de train
  */
 public class BilletTrain extends Billet {
 	private String classe;

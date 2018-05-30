@@ -2,25 +2,27 @@ package Gestion;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/**
- * 
- */
 
 /**
- * @author hugo
- *
+ * Gère les différents billets
  */
 public class Billets {
 	private ArrayList<Billet> BilletList;
-	/**
-	 * 
-	 */
 	public Billets() {
 		this.BilletList = new ArrayList<Billet>();
 	}
+	/**
+	 * Permet d'ajouter un billet
+	 * @param NewBillet
+	 */
 	public void ajouterBillet(Billet NewBillet) {
 		this.BilletList.add(NewBillet);
 	}
+	/**
+	 * Permet de supprimer le billet dont le numero est donné
+	 * @param numero
+	 * @throws BilletException
+	 */
 	public void supprime(int numero) throws BilletException {
 		Billet ele;
 		boolean test = true;
@@ -37,6 +39,12 @@ public class Billets {
 			throw new BilletException("Le billet  "+numero+" n'existe pas");
 		}
 	}
+	/**
+	 * Retourne le billet dont le numéro est donné
+	 * @param numero
+	 * @return
+	 * @throws BilletException
+	 */
 	public Billet getBillet(int numero) throws BilletException {
 		Iterator<Billet> it = this.BilletList.iterator();
 		if (this.BilletList.size()>0) {
@@ -59,9 +67,17 @@ public class Billets {
 			throw new BilletException("Pas de billet enregistre");
 		}
 	}
+	/**
+	 * Renvoie le nombre de billet
+	 * @return
+	 */
 	public int nbBillet() {
 		return this.BilletList.size();
 	}
+	/**
+	 * Renvoie le nombre d'itinéraire différents
+	 * @return
+	 */
 	public int itineraireDiff() {
 		ArrayList<Itineraire> ItList = new <Itineraire>ArrayList();
 		ArrayList<Integer> nbList = new <Integer>ArrayList();
@@ -85,6 +101,11 @@ public class Billets {
 			return 0;
 		}
 	}
+	/**
+	 * Renvoie l'itinéraire le plus vendu
+	 * @return
+	 * @throws BilletException
+	 */
 	public Itineraire plusVendu() throws BilletException {
 		ArrayList<Itineraire> ItList = new ArrayList<Itineraire>();
 		ArrayList<Integer> nbList = new ArrayList<Integer>();
@@ -116,6 +137,10 @@ public class Billets {
 			throw new BilletException("Aucun Itineraire");
 		}
 	}
+	/**
+	 * Renvoie la recette effectuée
+	 * @return
+	 */
 	public int recette() {
 		Iterator<Billet> it = this.BilletList.iterator();
 		int somme = 0;
@@ -124,6 +149,10 @@ public class Billets {
 		}
 		return somme;
 	}
+	/**
+	 * Renvoie la recette effectuée par les trains
+	 * @return
+	 */
 	public int recetteTrain() {
 		Iterator<Billet> it = this.BilletList.iterator();
 		int somme = 0;
@@ -136,6 +165,10 @@ public class Billets {
 		}
 		return somme;
 	}
+	/**
+	 * Renvoie la recette effectuée par les bus
+	 * @return
+	 */
 	public int recetteBus() {
 		Iterator<Billet> it = this.BilletList.iterator();
 		int somme = 0;

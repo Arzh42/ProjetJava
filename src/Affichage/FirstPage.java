@@ -12,8 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 /**
- * @author hugo
- *
+ * Gère l'affichage de la page de choix entre Stat et Gestion
  */
 public class FirstPage extends JPanel {
 
@@ -24,10 +23,14 @@ public class FirstPage extends JPanel {
 	public FirstPage(Fenetre mainFen) {
 		this.mainFen = mainFen;
 		this.setLayout(new GridLayout(2, 1));
+		
 		JButton button1 = new JButton("Gestion de Billet");
-		JButton button2 = new JButton("Fucking bitch Stat");
 		button1.addActionListener(new actionGestionBilletPage());
+		
+		JButton button2 = new JButton("Fucking bitch Stat");
 		button2.addActionListener(new actionStatPage());
+		
+		
 		this.add(button1);
 		this.add(button2);
 	}

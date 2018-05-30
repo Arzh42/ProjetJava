@@ -14,8 +14,7 @@ import javax.swing.JPanel;
 import Affichage.FirstPage.actionGestionBilletPage;
 
 /**
- * @author hugo
- *
+ * Gère l'affichage de la page de gestion des billets
  */
 public class GestionBilletPage extends JPanel {
 	private Fenetre mainFen;

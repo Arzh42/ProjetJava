@@ -19,6 +19,9 @@ import Gestion.BilletTrain;
 import Gestion.Billets;
 import Gestion.ItineraireException;
 
+/**
+ * Gère la page de consulation des billets
+ */
 public class ConsultationBilletPage extends JPanel {
 	private Fenetre mainFen;
 	private CardLayout layout;
@@ -111,6 +114,9 @@ public class ConsultationBilletPage extends JPanel {
 			JOptionPane jop = new JOptionPane();
 			jop.showMessageDialog(null, e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
 		}
+	}
+	public void reload() {
+		this.layout.show(this, "ask");
 	}
 	/**
 	 * Permet d'afficher un billet de train

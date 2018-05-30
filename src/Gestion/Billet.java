@@ -1,5 +1,7 @@
 package Gestion;
-
+/**
+ * Représente un billet
+ */
 public abstract class Billet {
 	private static int compteur;
 	private int numero;

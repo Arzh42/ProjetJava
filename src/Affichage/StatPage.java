@@ -9,6 +9,9 @@ import Gestion.BilletException;
 import Gestion.Billets;
 import Gestion.ItineraireException;
 
+/**
+ * Gère l'affichage de la page de Statistique
+ */
 public class StatPage extends JPanel {
 	private Fenetre mainFen;
 	private JLabel lbl1;
@@ -21,14 +24,17 @@ public class StatPage extends JPanel {
 		this.mainFen = mainFen;
 
 		Billets billets = this.mainFen.getBillets();
-		System.out.println(billets);
 		this.setLayout(new GridLayout(6, 1));
+		
+		
 		lbl1 = new JLabel("Nombre de billets vendus : ");
 		lbl2 = new JLabel("Nombre d'itinéraires différents vendus : ");
 		lbl3 = new JLabel("L'itinéraire le plus vendu : ");
 		lbl4 = new JLabel("Recettes totales : ");
 		lbl5 = new JLabel("Recettes des billets de train : ");
 		lbl6 = new JLabel("Recettes des billets de bus : ");
+		
+		
 		this.add(lbl1);
 		this.add(lbl2);
 		this.add(lbl3);
@@ -36,6 +42,10 @@ public class StatPage extends JPanel {
 		this.add(lbl5);
 		this.add(lbl6);
 	}
+	/**
+	 * Recharge l'affichage avec les nouvelles données
+	 * @param billets
+	 */
 	public void reload(Billets billets) {
 		this.lbl1.setText("Nombre de billets vendus : "+billets.nbBillet());
 		this.lbl2.setText("Nombre d'itinéraire différents vendus : "+billets.itineraireDiff());
