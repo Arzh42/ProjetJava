@@ -1,10 +1,19 @@
+import java.util.Scanner;
 
+/**
+ * @author hugo
+ * Tout est à faire
+ */
 public class Etape {
 	private RendezVous rd1;
 	private RendezVous rd2;
 	public Etape(RendezVous debut,RendezVous fin) {
 		this.setRd1(debut);
 		this.setRd2(fin);
+	}
+	public Etape(Scanner s) {
+		this.setRd1(new RendezVous(s));
+		this.setRd2(new RendezVous(s));
 	}
 	public void affichage() {
 		

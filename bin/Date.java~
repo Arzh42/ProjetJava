@@ -1,0 +1,135 @@
+/**
+ * 
+ */
+import java.util.*;
+/**
+ * @author hugo
+ *
+ */
+public class Date {
+
+	private int heure;
+	private int jour;
+	private int mois;
+	private int annee;
+	private int seconde;
+	private int minute;
+	/**
+	 * 
+	 */
+	public Date(int jour,int mois,int annee,int heure,int minute,int seconde) {
+		this.jour = jour;
+		this.mois = mois;
+		this.annee = annee;
+		this.heure = heure;
+		this.minute = minute;
+		this.seconde = seconde;
+	}
+	
+	/**
+	 *
+	 */
+	public Date(){
+		//Scanner sc = new Scanner(System.in);
+		System.out.println("Veuillez rentrer le jour de depart :");
+		Scanner sc = new Scanner(System.in);
+		this.jour = sc.nextInt();
+		System.out.println("Veuillez preciser le mois de depart :");
+		this.mois = sc.nextInt();
+		System.out.println("Veuillez preciser l'annee du depart :");
+		this.annee = sc.nextInt();
+		System.out.println("L'heure du depart voulu :");
+		this.heure = sc.nextInt();
+		System.out.println("Les minutes du depart voulu :");
+		this.minute = sc.nextInt();
+		System.out.println("Les secondes du depart voulu :");
+		this.seconde = sc.nextInt();
+		sc.close();
+	}
+	/**
+	 * Afficher la date
+	 */
+	public void Afficher() {
+		System.out.println("Bonjour je suis le "+this.jour+"/"+this.mois+"/"+this.annee+" a "+this.heure+"h"+this.minute+":"+this.seconde);
+	}
+	/**
+	 * @return the heure
+	 */
+	public int getHeure() {
+		return heure;
+	}
+	/**
+	 * @param heure the heure to set
+	 */
+	public void setHeure(int heure) {
+		this.heure = heure;
+	}
+	/**
+	 * @return the jour
+	 */
+	public int getJour() {
+		return jour;
+	}
+	/**
+	 * @param jour the jour to set
+	 */
+	public void setJour(int jour) {
+		this.jour = jour;
+	}
+	/**
+	 * @return the mois
+	 */
+	public int getMois() {
+		return mois;
+	}
+	/**
+	 * @param mois the mois to set
+	 */
+	public void setMois(int mois) {
+		this.mois = mois;
+	}
+	/**
+	 * @return the annee
+	 */
+	public int getAnnee() {
+		return annee;
+	}
+	/**
+	 * @param annee the annee to set
+	 */
+	public void setAnnee(int annee) {
+		this.annee = annee;
+	}
+	/**
+	 * @return the seconde
+	 */
+	public int getSeconde() {
+		return seconde;
+	}
+	/**
+	 * @param seconde the seconde to set
+	 */
+	public void setSeconde(int seconde) {
+		this.seconde = seconde;
+	}
+	/**
+	 * @return the minute
+	 */
+	public int getMinute() {
+		return minute;
+	}
+	/**
+	 * @param minute the minute to set
+	 */
+	public void setMinute(int minute) {
+		this.minute = minute;
+	}
+	
+	public static void main(String[] args){
+		Date date = new Date();
+		date.Afficher();
+		Date date2 = new Date(date.getJour(), date.getMois(), date.getAnnee(), date.getHeure(), date.getMinute(), date.getSeconde());
+		date2.Afficher();
+	}
+
+}

@@ -4,7 +4,8 @@
 import java.util.*;
 /**
  * @author hugo
- *
+ *	Gére des dates
+ *	Fini
  */
 public class Date {
 
@@ -29,11 +30,10 @@ public class Date {
 	/**
 	 *
 	 */
-	public Date(){
-		keyboardEntry();
+	public Date(Scanner s){
+		keyboardEntry(s);
 	}
-	public void keyboardEntry () {
-		Scanner sc = new Scanner(System.in);
+	public void keyboardEntry (Scanner sc) {
 		try {
 			try {
 				System.out.println("Veuillez rentrer le jour de depart :");
@@ -52,15 +52,13 @@ public class Date {
 			catch(DateException e) {
 				System.out.print(e.getMessage());
 				System.out.println(", Recommencer");
-				this.keyboardEntry();
+				this.keyboardEntry(sc);
 			}
 		}
 		catch(InputMismatchException e) {
 			System.out.println("Ceci n'est pas un chiffre, recommencer");
-			this.keyboardEntry();
-		}
-		sc.close();
-	
+			this.keyboardEntry(sc);
+		}	
 	}
 	/**
 	 * Afficher la date
@@ -173,10 +171,12 @@ public class Date {
 	}
 	
 	public static void main(String[] args){
-		Date date = new Date();
+		Scanner s = new Scanner(System.in);
+		Date date = new Date(s);
 		date.Afficher();
 		Date date2 = new Date(date.getJour(), date.getMois(), date.getAnnee(), date.getHeure(), date.getMinute(), date.getSeconde());
 		date2.Afficher();
+		s.close();
 	}
 
 }
