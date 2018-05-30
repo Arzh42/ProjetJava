@@ -100,9 +100,9 @@ public class NouveauBilletPage extends JPanel {
 			int minute = cb5.getSelectedIndex()*5;
 			int minute2 = minute;
 			int heure2 = heure+r.nextInt(24);
-			int jour2;
-			int mois2;
-			int annee2;
+			int jour2 = 0;
+			int mois2 = 0;
+			int annee2 = 0;
 			if(heure2 >= 24){
 				heure2 = heure2 % 24;
 				jour2 = jour + 1 + r.nextInt(2);
@@ -142,8 +142,8 @@ public class NouveauBilletPage extends JPanel {
 			Itineraire it = new Itineraire();
 			it.ajouterEtape(etape1);
 			
-			Billet newBillet = new Billet(10+r.nextInt(500), it);
-			billets.ajouterBillet(newBillet);
+			//Billet newBillet = new Billet(10+r.nextInt(500), it);
+			//billets.ajouterBillet(newBillet);
 		}
 	}
 	

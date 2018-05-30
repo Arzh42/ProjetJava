@@ -1,12 +1,17 @@
 package Affichage;
 
 
+import java.awt.BorderLayout;
 import java.awt.CardLayout;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 
 import Gestion.*;
@@ -22,6 +27,15 @@ public class Fenetre extends JFrame {
 	JPanel AnnulationBilletPage = new AnnulationBilletPage(this);
 	Billets billets = new Billets();
 	public Fenetre() {
+		JMenuBar menuBar = new JMenuBar();
+		JButton gestionBut = new JButton("GestionBillet");
+		gestionBut.addActionListener(new retourGestion());
+		menuBar.add(gestionBut);
+		JButton statBut = new JButton("Statistique");
+		statBut.addActionListener(new retourStat());
+		menuBar.add(statBut);
+		JLabel credit = new JLabel("Créé par Hugo Chataigner et Loulou Piton");
+		menuBar.add(credit);
 		this.billets = new Billets();
 		Itineraire it = new Itineraire();
 		RendezVous rd1 = new RendezVous(new Date(10, 10, 2015,10,10,0),new Ville("Brest"));
@@ -42,7 +56,8 @@ public class Fenetre extends JFrame {
 		this.mainPanel.add(ConsultationBilletPage, "ConsultationBilletPage");
 		this.mainPanel.add(ModifBillet, "ModifBilletPage");
 		this.mainPanel.add(AnnulationBilletPage,"AnnulationBilletPage" );
-		this.setContentPane(this.mainPanel);
+		this.getContentPane().add(menuBar,BorderLayout.NORTH);
+		this.getContentPane().add(this.mainPanel,BorderLayout.CENTER);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     	this.setVisible(true);
 	}
@@ -55,5 +70,19 @@ public class Fenetre extends JFrame {
 	}
 	public Billets getBillets() {
 		return this.billets;
+	}
+	class retourGestion implements ActionListener {
+
+		public void actionPerformed(ActionEvent arg0) {
+			switchPage("GestionBilletPage");
+		}
+		
+	}
+	class retourStat implements ActionListener {
+
+		public void actionPerformed(ActionEvent arg0) {
+			switchPage("StatPage");
+		}
+		
 	}
 }
