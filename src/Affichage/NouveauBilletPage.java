@@ -43,7 +43,7 @@ public class NouveauBilletPage extends JPanel {
 	public NouveauBilletPage(Fenetre mainFen) {
 		this.mainFen = mainFen;
 
-		this.setLayout(new GridLayout(4,6));
+		this.setLayout(new CardLayout());
 		
 		JLabel label1 = new JLabel("Jour :");
 		JLabel label2 = new JLabel("Mois :");
@@ -184,7 +184,7 @@ public class NouveauBilletPage extends JPanel {
 	}
 	
 	class actionTrain implements ActionListener {
-		publis void actionPerformed(ActionEvent arg0){
+		public void actionPerformed(ActionEvent arg0){
 			String[] klasse = {"1","2","Business"};
 			String[] cens = {"Vers l'avant","Vers l'arriere"};
 			JComboBox Clas = new JComboBox(klasse);
