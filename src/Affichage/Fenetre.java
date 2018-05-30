@@ -1,12 +1,15 @@
 package Affichage;
 
+
 import java.awt.CardLayout;
+
 import java.awt.GridLayout;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import Gestion.Billets;
 public class Fenetre extends JFrame {
 	JPanel mainPanel;
 	CardLayout cards;
@@ -17,6 +20,7 @@ public class Fenetre extends JFrame {
 	JPanel ConsultationBilletPage = new ConsultationBilletPage(this);
 	JPanel ModifBillet = new ModifBilletPage(this);
 	JPanel AnnulationBilletPage = new AnnulationBilletPage(this);
+	Billets billets = new Billets();
 	public Fenetre() {
 		this.setTitle("Ultra Gestionnator of Train and Bus Billet");
 		this.setSize(500, 500);
