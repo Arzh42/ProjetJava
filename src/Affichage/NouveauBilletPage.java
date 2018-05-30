@@ -185,9 +185,16 @@ public class NouveauBilletPage extends JPanel {
 			it.ajouterEtape(etape1);
 		
 			if(BT){
+				classe = Clas.getSelectedItem().toString();
+				if(Sens.getSelectedIndex() == 0){
+					sens = true;
+				} else {
+					sens = false;
+				}
 				BilletTrain newBillet = new BilletTrain(60 + r.nextInt(500), it, classe, sens);
 				billets.ajouterBillet(newBillet);
 			} else {
+			confort = Conf.getSelectedItem().toString();
 				BilletBus newBillet = new BilletBus(10 + r.nextInt(120), it, confort);
 				billets.ajouterBillet(newBillet);
 			}
