@@ -1,4 +1,9 @@
+import java.util.Scanner;
 
+/**
+ * @author hugo
+ * Tout est � faire
+ */
 public class Etape {
 	private RendezVous rd1;
 	private RendezVous rd2;
@@ -6,11 +11,13 @@ public class Etape {
 		this.setRd1(debut);
 		this.setRd2(fin);
 	}
-	public void Afficher() {
-		System.out.print("Départ: "+rd1.getVille().getName()+" ");
-		rd1.getDate().Afficher();
-		System.out.print("Arrivee: "+rd2.getVille().getName()+" ");
-		rd2.getDate().Afficher();
+
+	public Etape(Scanner s) {
+		this.setRd1(new RendezVous(s));
+		this.setRd2(new RendezVous(s));
+	}
+	public void affichage() {
+		
 	}
 	/**
 	 * @return the rd1
