@@ -21,7 +21,7 @@ public class Billets {
 	public void ajouterBillet(Billet NewBillet) {
 		this.BilletList.add(NewBillet);
 	}
-	public void supprime(int numero) {
+	public void supprime(int numero) throws BilletException {
 		Billet ele;
 		boolean test = true;
 		int i = 0;
@@ -32,6 +32,9 @@ public class Billets {
 				test = false;
 			}
 			i ++;
+		}
+		if (test) {
+			throw new BilletException("Le billet  "+numero+" n'existe pas");
 		}
 	}
 	public Billet getBillet(int numero) throws BilletException {
@@ -128,7 +131,7 @@ public class Billets {
 		while(it.hasNext()) {
 			ele = it.next();
 			if (ele.getClass().equals(BilletTrain.class)) {
-				somme += it.next().getPrix();		
+				somme += ele.getPrix();		
 			}
 		}
 		return somme;

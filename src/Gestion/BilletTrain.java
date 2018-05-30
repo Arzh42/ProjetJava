@@ -10,12 +10,12 @@ package Gestion;
  */
 public class BilletTrain extends Billet {
 	private String classe;
-	private Boolean sens;
+	private boolean sens;
 
 	/**
 	 * 
 	 */
-	public BilletTrain(int prix,Itineraire it,String classe,Boolean sens) {
+	public BilletTrain(int prix,Itineraire it,String classe,boolean sens) {
 		super(prix,it);
 		this.setClasse(classe);
 		this.setSens(sens);

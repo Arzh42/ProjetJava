@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 import java.util.Random;
 
 import Gestion.Billet;
+import Gestion.BilletBus;
+import Gestion.BilletTrain;
 import Gestion.Billets;
 import Gestion.Date;
 import Gestion.Etape;
@@ -111,9 +113,9 @@ public class NouveauBilletPage extends JPanel {
 			int minute = cb5.getSelectedIndex()*5;
 			int minute2 = minute;
 			int heure2 = heure+r.nextInt(24);
-			int jour2;
-			int mois2;
-			int annee2;
+			int jour2 = 0;
+			int mois2 = 0;
+			int annee2 = 0;
 			if(heure2 >= 24){
 				heure2 = heure2 % 24;
 				jour2 = jour + 1 + r.nextInt(2);
@@ -152,7 +154,7 @@ public class NouveauBilletPage extends JPanel {
 			
 			Itineraire it = new Itineraire();
 			it.ajouterEtape(etape1);
-			
+		
 			if(BT){
 				BilletTrain newBillet = new BilletTrain(60 + r.nextInt(500), it, classe, sens);
 				billets.ajouterBillet(newBillet);
@@ -172,14 +174,14 @@ public class NouveauBilletPage extends JPanel {
 	
 	class actionBus implements ActionListener {
 		public void actionPerformed(ActionEvent arg0){
-			String[] confort = {"Faible","Moyen","Haut"};
-			JComboBox Conf = new JComboBox(confort);
+			String[] confortTab = {"Faible","Moyen","Haut"};
+			JComboBox<Object> Conf = new JComboBox<Object>(confortTab);
 			
 			pane1.add(Conf);
 			
 			BT = false;
 			
-			confort = Conf.getSelectedItem();
+			confort = Conf.getSelectedItem().toString();
 		}
 	}
 	
@@ -195,8 +197,13 @@ public class NouveauBilletPage extends JPanel {
 			
 			BT = true;
 			
-			classe = Clas.getSelectedItem();
-			sens = Sens.getSelectedIndex();
+			classe = Clas.getSelectedItem().toString();
+			if (Sens.getSelectedIndex()==0) {
+				sens = false;
+			}
+			else {
+				sens = true;
+			}
 		}
 	}
 }

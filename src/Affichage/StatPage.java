@@ -22,7 +22,7 @@ public class StatPage extends JPanel {
 
 		Billets billets = this.mainFen.getBillets();
 		System.out.println(billets);
-		this.setLayout(new GridLayout(3, 2));
+		this.setLayout(new GridLayout(6, 1));
 		lbl1 = new JLabel("Nombre de billets vendus : ");
 		lbl2 = new JLabel("Nombre d'itinéraires différents vendus : ");
 		lbl3 = new JLabel("L'itinéraire le plus vendu : ");
