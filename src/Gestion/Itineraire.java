@@ -17,7 +17,7 @@ public class Itineraire {
 		boolean test = true;
 		while(test) {
 			this.ajouterEtape(new Etape(s));
-			System.out.println("Voulez-vous rajoutez une étape ?(y/n)");
+			System.out.println("Voulez-vous rajouter une etape ? (y/n)");
 			if (s.next()!="y") {
 				test = false;
 			}
@@ -36,7 +36,7 @@ public class Itineraire {
 	public void affichageEtape() {
 		Iterator<Etape> it = this.EtapeSet.iterator();
 		while(it.hasNext()) {
-			it.next().Afficher();
+			it.next().afficher();
 		}
 	}
 	public Date dateDepart() throws Exception {
@@ -45,7 +45,7 @@ public class Itineraire {
 			return it.next().getRd1().getDate();
 		}
 		else {
-			throw new Exception("Pas d'élément");
+			throw new Exception("Pas d'element");
 		}
 	}
 	public Date dateArrivee() throws Exception {
@@ -58,7 +58,7 @@ public class Itineraire {
 			return tmp;	
 		}
 		else {
-			throw new Exception("Pas d'élément");
+			throw new Exception("Pas d'element");
 		}
 	}
 	public ArrayList<Ville> tabVille() throws Exception {
@@ -74,7 +74,7 @@ public class Itineraire {
 			return tabVille;
 		}
 		else {
-			throw new Exception("Pas d'élément");
+			throw new Exception("Pas d'element");
 		}
 	}
 	public void modifEtape(Etape e,Etape newEtape) throws Exception {
@@ -91,11 +91,11 @@ public class Itineraire {
 				}
 			}
 			if (!find) {
-				throw new Exception("Elément pas trouvé");
+				throw new Exception("Element pas trouve");
 			}
 		}
 		else {
-			throw new Exception("Pas d'élément");
+			throw new Exception("Pas d'element");
 		}
 	}
 	public static boolean equals(Itineraire i1,Itineraire i2) {

@@ -18,17 +18,21 @@ public class Etape {
 	}
 	
 	/**
-	 * Permet de creer une etape
+	 * Permet de creer une etape a partir d'un Scanner
 	 */
 	public Etape(Scanner s) {
 		this.setRd1(new RendezVous(s));
 		this.setRd2(new RendezVous(s));
 	}
-	public void Afficher() {
+	
+	/**
+	 * Affiche une etape
+	 */
+	public void afficher() {
 		System.out.print("Le voyage se fera de ");
-		rd1.Afficher();
+		rd1.afficher();
 		System.out.print("jusqu'à ");
-		rd2.Afficher();
+		rd2.afficher();
 	}
 	/**
 	 * @return the rd1

@@ -9,11 +9,17 @@ import java.util.*;
 public class RendezVous {
 	private Date date;
 	private Ville ville;
+	/**
+	 * Permet de creer un Rendez-vous a partir de parametres
+	 */
 	public RendezVous(Date date,Ville ville) {
 		this.setDate(date);
 		this.setVille(ville);
 	}
 
+	/**
+	 * Permet de creer une ville a partir d'une saisie clavier
+	 */
 	public RendezVous(Scanner s) {
 		this.keyboardEntry(s);
 	}
@@ -22,11 +28,11 @@ public class RendezVous {
 		this.setVille(new Ville(s));
 	}
 	/**
-	 *
+	 * Afficher un Rendez-vous
 	 */
-	public void Afficher(){
+	public void afficher(){
 		System.out.print("Je me rend a "+this.ville.getName()+" et ");
-		this.date.Afficher();
+		this.date.afficher();
 	}
 	/**
 	 * @return the date
@@ -58,7 +64,7 @@ public class RendezVous {
 		Ville ville = new Ville(s);
 		Date date = new Date(s);
 		RendezVous rdv = new RendezVous(date, ville);
-		rdv.Afficher();
+		rdv.afficher();
 		s.close();
 	}
 

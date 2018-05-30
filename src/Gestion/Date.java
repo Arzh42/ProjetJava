@@ -17,7 +17,7 @@ public class Date {
 	private int seconde;
 	private int minute;
 	/**
-	 * 
+	 * Permet de creer une date avec des parametres
 	 */
 	public Date(int jour,int mois,int annee,int heure,int minute,int seconde) {
 		this.jour = jour;
@@ -29,7 +29,7 @@ public class Date {
 	}
 	
 	/**
-	 *
+	 * Permet de creer une date a partir d'une lecture clavier
 	 */
 	public Date(Scanner s){
 		keyboardEntry(s);
@@ -64,7 +64,7 @@ public class Date {
 	/**
 	 * Afficher la date
 	 */
-	public void Afficher() {
+	public void afficher() {
 		System.out.println("le "+this.jour+"/"+this.mois+"/"+this.annee+" a "+this.heure+"h"+this.minute+":"+this.seconde);
 	}
 	/**
@@ -78,7 +78,7 @@ public class Date {
 	 */
 	public void setHeure(int heure) throws DateException {
 		if (heure<0||heure>=23) {
-			throw new DateException("L'heure doit �tre comprise entre 0 et 23");
+			throw new DateException("L'heure doit etre comprise entre 0 et 23");
 		}
 		else {
 			this.heure = heure;
@@ -95,7 +95,7 @@ public class Date {
 	 */
 	public void setJour(int jour)  throws DateException  {
 		if (jour<1||jour>=31) {
-			throw new DateException("Le jour doit �tre compris entre 1 et 31");
+			throw new DateException("Le jour doit etre compris entre 1 et 31");
 		}
 		else {
 			this.jour = jour;
@@ -112,7 +112,7 @@ public class Date {
 	 */
 	public void setMois(int mois) throws DateException  {
 		if (mois<1||mois>12) {
-			throw new DateException("Le mois doit �tre compris entre 1 et 12");
+			throw new DateException("Le mois doit etre compris entre 1 et 12");
 		}
 		else {
 			this.mois = mois;
@@ -129,7 +129,7 @@ public class Date {
 	 */
 	public void setAnnee(int annee) throws DateException  {
 		if (annee<1950||annee>=3000) {
-			throw new DateException("L'ann�e doit �tre comprise entre 1950 et 3000");
+			throw new DateException("L'ann�e doit etre comprise entre 1950 et 3000");
 		}
 		else {
 			this.annee = annee;
@@ -147,7 +147,7 @@ public class Date {
 	 */
 	public void setSeconde(int seconde) throws DateException  {
 		if (seconde<0||seconde>=60) {
-			throw new DateException("Le nombre de seconde doit �tre compris entre 0 et 59");
+			throw new DateException("Le nombre de seconde doit etre compris entre 0 et 59");
 		}
 		else {
 			this.seconde = seconde;
@@ -164,7 +164,7 @@ public class Date {
 	 */
 	public void setMinute(int minute) throws DateException  {
 		if (minute<0||minute>=60) {
-			throw new DateException("Le nombre de minute doit �tre compris entre 0 et 59");
+			throw new DateException("Le nombre de minute doit etre compris entre 0 et 59");
 		}
 		else {
 			this.minute = minute;
@@ -174,9 +174,9 @@ public class Date {
 	public static void main(String[] args){
 		Scanner s = new Scanner(System.in);
 		Date date = new Date(s);
-		date.Afficher();
+		date.afficher();
 		Date date2 = new Date(date.getJour(), date.getMois(), date.getAnnee(), date.getHeure(), date.getMinute(), date.getSeconde());
-		date2.Afficher();
+		date2.afficher();
 		s.close();
 	}
 
