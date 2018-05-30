@@ -39,16 +39,31 @@ public class Itineraire {
 			it.next().Afficher();
 		}
 	}
-	public Date dateDepart() throws Exception {
+	public String getAffichage() throws ItineraireException {
+		Iterator<Etape> it = this.EtapeSet.iterator();
+		if (it.hasNext()) {
+			Etape first = it.next();
+			Etape last = first;
+			while(it.hasNext()) {
+				last = it.next();
+			}
+			return "Itinéraire de "+first.getRd1().getVille()+" à "+last.getRd2().getVille();
+		}
+		else {
+			throw new ItineraireException("Pas d'étape dans l'itinéraire");
+		}
+		
+	}
+	public Date dateDepart() throws ItineraireException {
 		Iterator<Etape> it = this.EtapeSet.iterator();
 		if (it.hasNext()) {
 			return it.next().getRd1().getDate();
 		}
 		else {
-			throw new Exception("Pas d'élément");
+			throw new ItineraireException("Pas d'élément");
 		}
 	}
-	public Date dateArrivee() throws Exception {
+	public Date dateArrivee() throws ItineraireException {
 		Iterator<Etape> it = this.EtapeSet.iterator();
 		if (it.hasNext()) {
 			Date tmp = it.next().getRd1().getDate();
@@ -58,10 +73,10 @@ public class Itineraire {
 			return tmp;	
 		}
 		else {
-			throw new Exception("Pas d'élément");
+			throw new ItineraireException("Pas d'élément");
 		}
 	}
-	public ArrayList<Ville> tabVille() throws Exception {
+	public ArrayList<Ville> tabVille() throws ItineraireException {
 		ArrayList<Ville> tabVille = new ArrayList<Ville>();
 		Iterator<Etape> it = this.EtapeSet.iterator();
 		Etape tmp = null;
@@ -74,10 +89,10 @@ public class Itineraire {
 			return tabVille;
 		}
 		else {
-			throw new Exception("Pas d'élément");
+			throw new ItineraireException("Pas d'élément");
 		}
 	}
-	public void modifEtape(Etape e,Etape newEtape) throws Exception {
+	public void modifEtape(Etape e,Etape newEtape) throws ItineraireException {
 		Iterator<Etape> it = this.EtapeSet.iterator();
 		boolean find = false;
 		Etape tmp = null;
@@ -91,11 +106,11 @@ public class Itineraire {
 				}
 			}
 			if (!find) {
-				throw new Exception("Elément pas trouvé");
+				throw new ItineraireException("Elément pas trouvé");
 			}
 		}
 		else {
-			throw new Exception("Pas d'élément");
+			throw new ItineraireException("Pas d'élément");
 		}
 	}
 	public static boolean equals(Itineraire i1,Itineraire i2) {

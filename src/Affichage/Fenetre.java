@@ -9,11 +9,11 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import Gestion.Billets;
+import Gestion.*;
 public class Fenetre extends JFrame {
 	JPanel mainPanel;
 	CardLayout cards;
-	JPanel StatPage = new StatPage(this);
+	StatPage StatPage = new StatPage(this);
 	JPanel FirstPage = new FirstPage(this);
 	JPanel GestionBilletPage = new GestionBilletPage(this);
 	JPanel NouveauBilletPage = new NouveauBilletPage(this);
@@ -22,6 +22,9 @@ public class Fenetre extends JFrame {
 	JPanel AnnulationBilletPage = new AnnulationBilletPage(this);
 	Billets billets = new Billets();
 	public Fenetre() {
+		System.out.println("coucou");
+		this.billets = new Billets();
+		System.out.println(billets);
 		this.setTitle("Ultra Gestionnator of Train and Bus Billet");
 		this.setSize(500, 500);
 		this.setLocationRelativeTo(null);
@@ -41,5 +44,13 @@ public class Fenetre extends JFrame {
 	}
 	public void switchPage(String page) {
 		this.cards.show(this.mainPanel,page);
+		switch(page) {
+		case "StatPage":
+			this.StatPage.reload(this.billets);
+		}
+	}
+	public Billets getBillets() {
+		System.out.println(this.billets);
+		return this.billets;
 	}
 }
