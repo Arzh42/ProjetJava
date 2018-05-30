@@ -1,6 +1,7 @@
 package Affichage;
 
 import java.awt.CardLayout;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,20 +11,25 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
+import Affichage.ConsultationBilletPage.chercherBillet;
 import Affichage.NouveauBilletPage.actionBus;
 import Affichage.NouveauBilletPage.actionConfirm;
 import Affichage.NouveauBilletPage.actionQuit;
 import Affichage.NouveauBilletPage.actionTrain;
+import Gestion.Billet;
 import Gestion.BilletBus;
+import Gestion.BilletException;
 import Gestion.BilletTrain;
 import Gestion.Billets;
 import Gestion.Date;
 import Gestion.Etape;
 import Gestion.Itineraire;
+import Gestion.ItineraireException;
 import Gestion.RendezVous;
 import Gestion.Ville;
 
@@ -61,11 +67,31 @@ public class ModifBilletPage extends JPanel {
 	private boolean BT;
 	private JPanel mainPane;
 	private CardLayout cards;
+	private CardLayout layout;
+	private JTextField field;
 	
 	public ModifBilletPage(Fenetre mainFen) {
 		this.mainFen = mainFen;
-		this.setLayout(new GridLayout(5,4));
+		
+		this.layout = new CardLayout();
+		this.setLayout(this.layout);
+		
+		
+		JPanel modifPan = new JPanel();
+		modifPan.setLayout(new GridLayout(5,4));
 
+		JPanel askNumero = new JPanel();
+		
+		JLabel text = new JLabel("Numero du billet : ");
+		field = new JTextField("Numéro du billet"); 
+		JButton action = new JButton("Chercher");
+		action.addActionListener(new chercherBillet());
+		
+		askNumero.setLayout(new FlowLayout());
+		askNumero.add(text);
+		askNumero.add(field);
+		askNumero.add(action);
+		
 		this.pane1 = new JPanel();
 		this.cards = new CardLayout();
 		this.mainPane = new JPanel();
@@ -117,25 +143,28 @@ public class ModifBilletPage extends JPanel {
 		choix.add(bus);
 		choix.add(train);
 		
-		this.add(label1);
-		this.add(cb1);
-		this.add(label2);
-		this.add(cb2);
-		this.add(label3);
-		this.add(cb3);
-		this.add(label4);
-		this.add(cb4);
-		this.add(label5);
-		this.add(cb5);
-		this.add(label6);
-		this.add(text1);
-		this.add(label7);
-		this.add(text2);
-		this.add(bus);
-		this.add(train);
-		this.add(mainPane);
-		this.add(confirm);
-		this.add(quit);	
+		modifPan.add(label1);
+		modifPan.add(cb1);
+		modifPan.add(label2);
+		modifPan.add(cb2);
+		modifPan.add(label3);
+		modifPan.add(cb3);
+		modifPan.add(label4);
+		modifPan.add(cb4);
+		modifPan.add(label5);
+		modifPan.add(cb5);
+		modifPan.add(label6);
+		modifPan.add(text1);
+		modifPan.add(label7);
+		modifPan.add(text2);
+		modifPan.add(bus);
+		modifPan.add(train);
+		modifPan.add(mainPane);
+		modifPan.add(confirm);
+		modifPan.add(quit);	
+		
+		this.add(askNumero, "ask");
+		this.add(modifPan,"Modification");
 	
 	}
 
@@ -204,6 +233,80 @@ public class ModifBilletPage extends JPanel {
 				BilletBus newBillet = new BilletBus(10 + r.nextInt(120), it, confort);
 				billets.ajouterBillet(newBillet);
 			}
+		}
+	}
+	
+	
+	/**
+	 * Cherche un billet et appelle la fonction afficherBillet(bus ou train) avec ce billet
+	 * @param numero
+	 * Correspond au numéro du billet à rechercher
+	 */
+	public void rechercherBillet(int numero) {
+		Billets billets = this.mainFen.getBillets();
+		try {
+			//On appelle la fonction getBillet de Billets et on gère les exceptions qu'elle peut lever
+			Billet bill = billets.getBillet(numero);
+			if (bill.getClass().equals(BilletTrain.class)) {
+				this.afficherBilletTrain((BilletTrain) bill);
+			}
+			else {
+				this.afficherBilletBus((BilletBus) bill);
+			}
+			//On change la page à afficher
+			this.layout.show(this,"aff");
+			
+		}
+		catch(BilletException e) {
+			//En cas d'erreur on affiche une boite de dialogue qui donne l'erreur
+			JOptionPane jop = new JOptionPane();
+			jop.showMessageDialog(null, e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	public void reload() {
+		this.layout.show(this, "ask");
+	}
+	/**
+	 * Permet d'afficher un billet de train
+	 * @param billet
+	 * Instance de BilletTrain représentant le billet
+	 */
+	public void afficherBilletTrain(BilletTrain billet) {
+		cb1.setSelectedIndex(billet.getItineraire().dateDepart().getJour());
+		cb2.setSelectedIndex(billet.getItineraire().dateDepart().getMois());
+		cb3.setSelectedIndex(billet.getItineraire().dateDepart().getAnnee());
+		cb4.setSelectedIndex(billet.getItineraire().dateDepart().getHeure());
+		cb5.setSelectedIndex(billet.getItineraire().dateDepart().getMinute());
+		try {
+			itineraire.setText(billet.getItineraire().getAffichage());
+		} catch (ItineraireException e) {
+			itineraire.setText(e.getMessage());
+		}
+	}
+	/**
+	 * Permet d'afficher un billet de bus
+	 * @param billet
+	 * Instance de BilletBus représentant le billet
+	 */
+	public void afficherBilletBus(BilletBus billet) {
+		numero.setText(""+billet.getNumero());
+		prix.setText(""+billet.getPrix());
+		option1.setText(billet.getConfort());
+		option1Text.setText("Confort : ");
+		option2Text.setText("");
+		try {
+			itineraire.setText(billet.getItineraire().getAffichage());
+		} catch (ItineraireException e) {
+			itineraire.setText(e.getMessage());
+		}
+	}
+	/**
+	 * ActionListener du bouton de recherche de billet
+	 */
+	class chercherBillet implements ActionListener {
+
+		public void actionPerformed(ActionEvent arg0) {
+			rechercherBillet(Integer.parseInt(field.getText()));
 		}
 	}
 	
