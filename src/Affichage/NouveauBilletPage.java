@@ -36,16 +36,26 @@ public class NouveauBilletPage extends JPanel {
 	private JTextField text2;
 	
 	private JPanel pane1;
+	private JPanel pane2;
 	private String confort;
 	private String classe;
 	private boolean sens;
+	private JComboBox Sens;
+	private JComboBox Clas;
+	private JComboBox Conf;
 	
 	private boolean BT;
+	private JPanel mainPane;
+	private CardLayout cards;
 
 	public NouveauBilletPage(Fenetre mainFen) {
 		this.mainFen = mainFen;
 
-		this.setLayout(new GridLayout(4,6));
+		this.cards = CardLayout();
+		this.mainPane = new JPanel();
+		this.mainPane.setLayout(this.cards);
+		this.mainPane.add(pane1, "Bus");
+		this.mainPane.add(pane2, "Train");
 		
 		JLabel label1 = new JLabel("Jour :");
 		JLabel label2 = new JLabel("Mois :");
@@ -54,6 +64,18 @@ public class NouveauBilletPage extends JPanel {
 		JLabel label5 = new JLabel("Minute :");
 		JLabel label6 = new JLabel("Depart :");
 		JLabel label7 = new JLabel("Arrivee :");
+		
+		String[] confortTab = {"Faible","Moyen","Haut"};
+		Conf = new JComboBox<Object>(confortTab);
+		this.pane1.add(Conf);
+		
+		String[] klasse = {"1","2","Business"};
+		String[] cens = {"Vers l'avant","Vers l'arriere"};
+		Clas = new JComboBox(klasse);
+		Sens = new JComboBox(cens);
+		this.pane2.add(Clas);
+		this.pane2.add(Sens);
+		
 		JRadioButton bus = new JRadioButton("Bus");
 		JRadioButton train = new JRadioButton("Train");
 		cb1 = new JComboBox(Jours);
@@ -65,7 +87,6 @@ public class NouveauBilletPage extends JPanel {
 		text2 = new JTextField("<Saisir la ville d'arrivee>");
 		JButton confirm = new JButton("Confirmer");
 		JButton quit = new JButton("Annuler");
-		pane1 = new JPanel();
 		
 		confirm.addActionListener(new actionConfirm());
 		quit.addActionListener(new actionQuit());
@@ -92,7 +113,7 @@ public class NouveauBilletPage extends JPanel {
 		this.add(text2);
 		this.add(bus);
 		this.add(train);
-		this.add(pane1);
+		this.add(mainPane);
 		this.add(confirm);
 		this.add(quit);	
 	}
@@ -174,11 +195,6 @@ public class NouveauBilletPage extends JPanel {
 	
 	class actionBus implements ActionListener {
 		public void actionPerformed(ActionEvent arg0){
-			String[] confortTab = {"Faible","Moyen","Haut"};
-			JComboBox<Object> Conf = new JComboBox<Object>(confortTab);
-			
-			pane1.add(Conf);
-			
 			BT = false;
 			
 			confort = Conf.getSelectedItem().toString();
@@ -187,14 +203,6 @@ public class NouveauBilletPage extends JPanel {
 	
 	class actionTrain implements ActionListener {
 		public void actionPerformed(ActionEvent arg0){
-			String[] klasse = {"1","2","Business"};
-			String[] cens = {"Vers l'avant","Vers l'arriere"};
-			JComboBox Clas = new JComboBox(klasse);
-			JComboBox Sens = new JComboBox(cens);
-			
-			pane1.add(Clas);
-			pane1.add(Sens);
-			
 			BT = true;
 			
 			classe = Clas.getSelectedItem().toString();
