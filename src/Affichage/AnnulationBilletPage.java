@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -22,7 +23,7 @@ public class AnnulationBilletPage extends JPanel {
 		this.add(text);
 		field = new JTextField("Numéro du billet"); 
 		this.add(field);
-		JButton action = new JButton("Annuler");
+		JButton action = new JButton("Annuler le billet");
 		action.addActionListener(new annulerBillet());
 		this.add(action);
 	}
@@ -36,6 +37,9 @@ public class AnnulationBilletPage extends JPanel {
 	public void supprimerBillet(int numero) {
 		Billets billets = this.mainFen.getBillets();
 		billets.supprime(numero);
+		JOptionPane jop = new JOptionPane();
+		jop.showMessageDialog(null, "Le billet "+numero+" a bien été annulé", "Annulation", JOptionPane.DEFAULT_OPTION);
+		mainFen.switchPage("GestionBilletPage");
 	}
 	
 }
