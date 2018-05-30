@@ -97,6 +97,9 @@ public class Fenetre extends JFrame {
 		case "ConsultationBilletPage":
 			this.ConsultationBilletPage.reload();
 			break;
+		case "NouveauBilletPage":
+			this.NouveauBilletPage.initBillet(this.billets);
+			break;
 		}
 	}
 	

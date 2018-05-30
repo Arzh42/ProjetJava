@@ -1,6 +1,8 @@
 package Affichage;
 
 import javax.swing.*;
+
+import java.awt.CardLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -50,12 +52,12 @@ public class NouveauBilletPage extends JPanel {
 
 	public NouveauBilletPage(Fenetre mainFen) {
 		this.mainFen = mainFen;
+		this.setLayout(new GridLayout(5,4));
 
-		this.cards = CardLayout();
+		this.pane1 = new JPanel();
+		this.cards = new CardLayout();
 		this.mainPane = new JPanel();
 		this.mainPane.setLayout(this.cards);
-		this.mainPane.add(pane1, "Bus");
-		this.mainPane.add(pane2, "Train");
 		
 		JLabel label1 = new JLabel("Jour :");
 		JLabel label2 = new JLabel("Mois :");
@@ -69,12 +71,18 @@ public class NouveauBilletPage extends JPanel {
 		Conf = new JComboBox<Object>(confortTab);
 		this.pane1.add(Conf);
 		
+		this.pane2 = new JPanel();
 		String[] klasse = {"1","2","Business"};
 		String[] cens = {"Vers l'avant","Vers l'arriere"};
 		Clas = new JComboBox(klasse);
 		Sens = new JComboBox(cens);
 		this.pane2.add(Clas);
 		this.pane2.add(Sens);
+		
+		this.mainPane.add(pane1, "Bus");
+		this.mainPane.add(pane2, "Train");
+		
+		
 		
 		JRadioButton bus = new JRadioButton("Bus");
 		JRadioButton train = new JRadioButton("Train");
@@ -195,23 +203,15 @@ public class NouveauBilletPage extends JPanel {
 	
 	class actionBus implements ActionListener {
 		public void actionPerformed(ActionEvent arg0){
+			cards.show(mainPane, "Bus");
 			BT = false;
-			
-			confort = Conf.getSelectedItem().toString();
 		}
 	}
 	
 	class actionTrain implements ActionListener {
 		public void actionPerformed(ActionEvent arg0){
+			cards.show(mainPane, "Train");
 			BT = true;
-			
-			classe = Clas.getSelectedItem().toString();
-			if (Sens.getSelectedIndex()==0) {
-				sens = false;
-			}
-			else {
-				sens = true;
-			}
 		}
 	}
 }
