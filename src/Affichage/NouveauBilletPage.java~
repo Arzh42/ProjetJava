@@ -2,31 +2,48 @@ package Affichage;
 
 import javax.swing.*;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Random;
 
 import Gestion.Billet;
+import Gestion.Billets;
+import Gestion.Date;
+import Gestion.Etape;
+import Gestion.Itineraire;
+import Gestion.RendezVous;
+import Gestion.Ville;
 
 public class NouveauBilletPage extends JPanel {
-	private Billet billet;
+	private Billets billets;
 	private Fenetre mainFen;
 	
-	private String[] Jours;
-	private String[] Mois;
-	private String[] Annees;
-	private String[] Heures;
-	private String[] Minutes;
+	private String[] Jours = {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"};
+	private String[] Mois = {"Janvier","Fevrier","Mars","Avril","Mai","Juin","Juillet","Aout","Septembre","Octobre","Novembre","Decembre"};
+	private String[] Annees = {"2015","2016","2017","2018","2019","2020","2021","2022","2023","2024","2025"};
+	private String[] Heures = {"00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23"};
+	private String[] Minutes = {"00","05","10","15","20","25","30","35","40","45","50","55"};
+	
+	private JComboBox cb1;
+	private JComboBox cb2;
+	private JComboBox cb3;
+	private JComboBox cb4;
+	private JComboBox cb5;
 	
 	private JTextField text1;
 	private JTextField text2;
+	
+	private JPanel pane1;
+	private String confort;
+	private String classe;
+	private boolean sens;
+	
+	private boolean BT;
 
 	public NouveauBilletPage(Fenetre mainFen) {
 		this.mainFen = mainFen;
+
 		this.setLayout(new GridLayout(4,6));
-		
-		Jours = {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"};
-		Mois = {"Janvier","Fevrier","Mars","Avril","Mai","Juin","Juillet","Aout","Septembre","Octobre","Novembre","Decembre"};
-		Annees = {"2015","2016","2017","2018","2019","2020","2021","2022","2023","2024","2025"};
-		Heures = {"00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23"};
-		Minutes = {"00","05","10","15","20","25","30","35","40","45","50","55")};
 		
 		JLabel label1 = new JLabel("Jour :");
 		JLabel label2 = new JLabel("Mois :");
@@ -37,18 +54,21 @@ public class NouveauBilletPage extends JPanel {
 		JLabel label7 = new JLabel("Arrivee :");
 		JRadioButton bus = new JRadioButton("Bus");
 		JRadioButton train = new JRadioButton("Train");
-		JComboBox cb1 = new JComboBox(Jours);
-		JComboBox cb2 = new JComboBox(Mois);
-		JComboBox cb3 = new JComboBox(Annees);
-		JComboBox cb4 = new JComboBox(Heures);
-		JComboBox cb5 = new JComboBox(Minutes);
+		cb1 = new JComboBox(Jours);
+		cb2 = new JComboBox(Mois);
+		cb3 = new JComboBox(Annees);
+		cb4 = new JComboBox(Heures);
+		cb5 = new JComboBox(Minutes);
 		text1 = new JTextField("<Saisir la ville de depart>");
 		text2 = new JTextField("<Saisir la ville d'arrivee>");
 		JButton confirm = new JButton("Confirmer");
 		JButton quit = new JButton("Annuler");
+		pane1 = new JPanel();
 		
 		confirm.addActionListener(new actionConfirm());
 		quit.addActionListener(new actionQuit());
+		bus.addActionListener(new actionBus());
+		train.addActionListener(new actionTrain());
 		
 		ButtonGroup choix = new ButtonGroup();
 		choix.add(bus);
@@ -70,24 +90,25 @@ public class NouveauBilletPage extends JPanel {
 		this.add(text2);
 		this.add(bus);
 		this.add(train);
+		this.add(pane1);
 		this.add(confirm);
 		this.add(quit);	
 	}
 	
-	public void initBillet(Billets billet){
-		this.billet = billet;
+	public void initBillet(Billets billets){
+		this.billets = billets;
 	}
 	
 	class actionConfirm implements ActionListener {
-		public void actionConfirm(ActionEvent e){
+		public void actionPerformed(ActionEvent e){
 			
 			Random r = new Random();
 			
-			int jour = Jours.getSelectedIndex()+1;
-			int mois = Mois.getSelectedIndex()+1;
-			int annee = Annees.getSelectedIndex()+2015;
-			int heure = Heures.getSelectedIndex();
-			int minute = Minutes.getSelectedIndex()*5;
+			int jour = cb1.getSelectedIndex()+1;
+			int mois = cb2.getSelectedIndex()+1;
+			int annee = cb3.getSelectedIndex()+2015;
+			int heure = cb4.getSelectedIndex();
+			int minute = cb5.getSelectedIndex()*5;
 			int minute2 = minute;
 			int heure2 = heure+r.nextInt(24);
 			int jour2;
@@ -129,16 +150,52 @@ public class NouveauBilletPage extends JPanel {
 			RendezVous rd2 = new RendezVous(date2,ville2);
 			Etape etape1 = new Etape(rd1,rd2);
 			
-			Itineraire ET = new Itineraire();
-			Et.ajouterEtape(etape1);
+			Itineraire it = new Itineraire();
+			it.ajouterEtape(etape1);
 			
-			billet = new Billet(10+r.nextInt(500), ET);
+			if(BT){
+				BilletTrain newBillet = new BilletTrain(10 + r.nextInt(500), it, classe, sens);
+				billets.ajouterBillet(newBillet);
+			} else {
+				
+			}
 		}
 	}
 	
 	class actionQuit implements ActionListener {
-		public void actionQuit(ActionEvent e){
+		public void actionPerformed(ActionEvent arg0) {
 			mainFen.switchPage("GestionBilletPage");
+			
+		}
+	}
+	
+	class actionBus implements ActionListener {
+		public void actionPerformed(ActionEvent arg0){
+			String[] confort = {"Faible","Moyen","Haut"};
+			JComboBox Conf = new JComboBox(confort);
+			
+			pane1.add(Conf);
+			
+			BT = false;
+			
+			confort = Conf.getSelectedItem();
+		}
+	}
+	
+	class actionTrain implements ActionListener {
+		publis void actionPerformed(ActionEvent arg0){
+			String[] klasse = {"1","2","Business"};
+			String[] cens = {"Vers l'avant","Vers l'arriere"};
+			JComboBox Clas = new JComboBox(klasse);
+			JComboBox Sens = new JComboBox(cens);
+			
+			pane1.add(Clas);
+			pane1.add(Sens);
+			
+			BT = true;
+			
+			classe = Clas.getSelectedItem();
+			sens = Sens.getSelectedIndex();
 		}
 	}
 }

@@ -18,7 +18,7 @@ public class NouveauBilletPage extends JPanel {
 	private Billets billets;
 	private Fenetre mainFen;
 	
-	private String[] Jours = {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"};;
+	private String[] Jours = {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"};
 	private String[] Mois = {"Janvier","Fevrier","Mars","Avril","Mai","Juin","Juillet","Aout","Septembre","Octobre","Novembre","Decembre"};
 	private String[] Annees = {"2015","2016","2017","2018","2019","2020","2021","2022","2023","2024","2025"};
 	private String[] Heures = {"00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23"};
@@ -32,6 +32,13 @@ public class NouveauBilletPage extends JPanel {
 	
 	private JTextField text1;
 	private JTextField text2;
+	
+	private JPanel pane1;
+	private String confort;
+	private String classe;
+	private boolean sens;
+	
+	private boolean BT;
 
 	public NouveauBilletPage(Fenetre mainFen) {
 		this.mainFen = mainFen;
@@ -56,9 +63,12 @@ public class NouveauBilletPage extends JPanel {
 		text2 = new JTextField("<Saisir la ville d'arrivee>");
 		JButton confirm = new JButton("Confirmer");
 		JButton quit = new JButton("Annuler");
+		pane1 = new JPanel();
 		
 		confirm.addActionListener(new actionConfirm());
 		quit.addActionListener(new actionQuit());
+		bus.addActionListener(new actionBus());
+		train.addActionListener(new actionTrain());
 		
 		ButtonGroup choix = new ButtonGroup();
 		choix.add(bus);
@@ -80,6 +90,7 @@ public class NouveauBilletPage extends JPanel {
 		this.add(text2);
 		this.add(bus);
 		this.add(train);
+		this.add(pane1);
 		this.add(confirm);
 		this.add(quit);	
 	}
@@ -142,8 +153,13 @@ public class NouveauBilletPage extends JPanel {
 			Itineraire it = new Itineraire();
 			it.ajouterEtape(etape1);
 			
-			Billet newBillet = new Billet(10+r.nextInt(500), it);
-			billets.ajouterBillet(newBillet);
+			if(BT){
+				BilletTrain newBillet = new BilletTrain(60 + r.nextInt(500), it, classe, sens);
+				billets.ajouterBillet(newBillet);
+			} else {
+				BilletBus newBillet = new BilletBus(10 + r.nextInt(120), it, confort);
+				billets.ajouterBillet(newBillet);
+			}
 		}
 	}
 	
@@ -151,6 +167,36 @@ public class NouveauBilletPage extends JPanel {
 		public void actionPerformed(ActionEvent arg0) {
 			mainFen.switchPage("GestionBilletPage");
 			
+		}
+	}
+	
+	class actionBus implements ActionListener {
+		public void actionPerformed(ActionEvent arg0){
+			String[] confort = {"Faible","Moyen","Haut"};
+			JComboBox Conf = new JComboBox(confort);
+			
+			pane1.add(Conf);
+			
+			BT = false;
+			
+			confort = Conf.getSelectedItem();
+		}
+	}
+	
+	class actionTrain implements ActionListener {
+		publis void actionPerformed(ActionEvent arg0){
+			String[] klasse = {"1","2","Business"};
+			String[] cens = {"Vers l'avant","Vers l'arriere"};
+			JComboBox Clas = new JComboBox(klasse);
+			JComboBox Sens = new JComboBox(cens);
+			
+			pane1.add(Clas);
+			pane1.add(Sens);
+			
+			BT = true;
+			
+			classe = Clas.getSelectedItem();
+			sens = Sens.getSelectedIndex();
 		}
 	}
 }
