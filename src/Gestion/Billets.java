@@ -34,17 +34,27 @@ public class Billets {
 			i ++;
 		}
 	}
-	public Billet getBillet(int numero) {
+	public Billet getBillet(int numero) throws BilletException {
 		Iterator<Billet> it = this.BilletList.iterator();
-		Billet ele = this.BilletList.get(0);
-		boolean test = true;
-		while(it.hasNext()&&test) {
-			ele = it.next();
-			if (ele.getNumero()==numero) {
-				test = false;
+		if (this.BilletList.size()>0) {
+			Billet ele = null;
+			boolean test = true;
+			while(it.hasNext()&&test) {
+				ele = it.next();
+				if (ele.getNumero()==numero) {
+					test = false;
+				}
+			}
+			if (test) {
+				throw new BilletException("Le billet n'existe pas");
+			}
+			else {
+				return ele;
 			}
 		}
-		return ele;
+		else {
+			throw new BilletException("Pas de billet enregistre");
+		}
 	}
 	public int nbBillet() {
 		return this.BilletList.size();

@@ -11,7 +11,8 @@ public class NouveauBilletPage extends JPanel {
 	
 	public NouveauBilletPage(Fenetre mainFen) {
 		this.mainFen = mainFen;
-		this.setLayout(new GridLayout(4,6));
+		System.out.println("test");
+		this.setLayout(new GridLayout(3,6));
 		JLabel label1 = new JLabel("Jour :");
 		JLabel label2 = new JLabel("Mois :");
 		JLabel label3 = new JLabel("Annee :");

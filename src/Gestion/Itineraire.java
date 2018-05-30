@@ -47,7 +47,7 @@ public class Itineraire {
 			while(it.hasNext()) {
 				last = it.next();
 			}
-			return "Itinéraire de "+first.getRd1().getVille()+" à "+last.getRd2().getVille();
+			return "Itinéraire de "+first.getRd1().getVille().getName()+" à "+last.getRd2().getVille().getName();
 		}
 		else {
 			throw new ItineraireException("Pas d'étape dans l'itinéraire");

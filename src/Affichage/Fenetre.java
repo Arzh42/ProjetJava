@@ -22,9 +22,13 @@ public class Fenetre extends JFrame {
 	JPanel AnnulationBilletPage = new AnnulationBilletPage(this);
 	Billets billets = new Billets();
 	public Fenetre() {
-		System.out.println("coucou");
 		this.billets = new Billets();
-		System.out.println(billets);
+		Itineraire it = new Itineraire();
+		RendezVous rd1 = new RendezVous(new Date(10, 10, 2015,10,10,0),new Ville("Brest"));
+		RendezVous rd2 = new RendezVous(new Date(10, 10, 2015,10,10,0),new Ville("Mushroom kingdom"));
+		it.ajouterEtape(new Etape(rd1,rd2));
+		this.billets.ajouterBillet(new BilletBus(10,it,"confort"));
+		this.billets.ajouterBillet(new BilletTrain(10,it,"Business",true));
 		this.setTitle("Ultra Gestionnator of Train and Bus Billet");
 		this.setSize(500, 500);
 		this.setLocationRelativeTo(null);
@@ -50,7 +54,6 @@ public class Fenetre extends JFrame {
 		}
 	}
 	public Billets getBillets() {
-		System.out.println(this.billets);
 		return this.billets;
 	}
 }
