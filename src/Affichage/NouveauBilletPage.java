@@ -89,12 +89,14 @@ public class NouveauBilletPage extends JPanel {
 		JLabel label9 = new JLabel("Classe :");
 		JLabel label10 = new JLabel("Sens :");
 		
+		// Initialisation de l'interface Bus
 		this.pane1 = new JPanel();
-		this.pane1.add(label8);
 		String[] confortTab = {"Faible","Moyen","Haut"};
 		Conf = new JComboBox<Object>(confortTab);
+		this.pane1.add(label8);
 		this.pane1.add(Conf);
 		
+		// Initialisation de l'interface Train
 		this.pane2 = new JPanel();
 		String[] klasse = {"1","2","Business"};
 		String[] cens = {"Vers l'avant","Vers l'arriere"};
@@ -105,10 +107,12 @@ public class NouveauBilletPage extends JPanel {
 		this.pane2.add(label10);
 		this.pane2.add(Sens);
 		
+		// Ajout dans le Panel que l'on montre/cache
 		this.mainPane.add(pane1, "Bus");
 		this.mainPane.add(pane2, "Train");
 		
 			
+		// Initialisation des Boutons, des champs de saisie et des ComboBoxs 
 		JRadioButton bus = new JRadioButton("Bus");
 		JRadioButton train = new JRadioButton("Train");
 		cb1 = new JComboBox(Jours);
@@ -120,15 +124,16 @@ public class NouveauBilletPage extends JPanel {
 		text2 = new JTextField("<Saisir la ville d'arrivee>");
 		JButton confirm = new JButton("Confirmer");
 		JButton quit = new JButton("Annuler");
-		
 		JButton addEtape = new JButton("Ajouter l'etape");
 		
+		// On met des Ecouteurs sur les boutons pour qu'ils aient l'action définie par le bouton
 		addEtape.addActionListener(new actionEtape());
 		confirm.addActionListener(new actionConfirm());
 		quit.addActionListener(new actionQuit());
 		bus.addActionListener(new actionBus());
 		train.addActionListener(new actionTrain());
 		
+		// On fait un groupe de bouton pour eviter que Bus et Train soient cochés en meme temps 
 		ButtonGroup choix = new ButtonGroup();
 		choix.add(bus);
 		choix.add(train);
@@ -144,6 +149,7 @@ public class NouveauBilletPage extends JPanel {
 		this.add(cb4);
 		this.add(label5);
 		this.add(cb5);
+		
 		// Ligne pour rentrer les villes
 		this.add(label0);
 		this.add(label0);
@@ -155,10 +161,10 @@ public class NouveauBilletPage extends JPanel {
 		this.add(text2);
 		this.add(label0);
 		this.add(label0);
+		
 		// Ligne pour le bus
 		this.add(label0);
 		this.add(bus);
-		this.add(mainPane);
 		this.add(label0);
 		this.add(label0);
 		this.add(label0);
@@ -166,6 +172,8 @@ public class NouveauBilletPage extends JPanel {
 		this.add(label0);
 		this.add(label0);
 		this.add(label0);
+		this.add(label0);
+		
 		// Ligne pour le train
 		this.add(label0);
 		this.add(train);
@@ -177,6 +185,7 @@ public class NouveauBilletPage extends JPanel {
 		this.add(label0);
 		this.add(label0);
 		this.add(label0);
+		
 		// Ligne pour donner de l'espace
 		this.add(label0);
 		this.add(label0);
@@ -188,6 +197,7 @@ public class NouveauBilletPage extends JPanel {
 		this.add(label0);
 		this.add(label0);
 		this.add(label0);
+		
 		// Ligne de boutons de controle de l'interface
 		this.add(label0);
 		this.add(label0);

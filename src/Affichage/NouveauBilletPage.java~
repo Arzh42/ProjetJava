@@ -19,24 +19,29 @@ import Gestion.RendezVous;
 import Gestion.Ville;
 
 public class NouveauBilletPage extends JPanel {
+	// Declaration des variables utiles
 	private Billets billets;
 	private Fenetre mainFen;
 	
+	// Declaration de tableau de string pour faciliter l'interface pour l'utilisateur
 	private String[] Jours = {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"};
 	private String[] Mois = {"Janvier","Fevrier","Mars","Avril","Mai","Juin","Juillet","Aout","Septembre","Octobre","Novembre","Decembre"};
 	private String[] Annees = {"2015","2016","2017","2018","2019","2020","2021","2022","2023","2024","2025"};
 	private String[] Heures = {"00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23"};
 	private String[] Minutes = {"00","05","10","15","20","25","30","35","40","45","50","55"};
 	
+	// Declaration des ComboBox utiles pour la mise en place d'un nouveau billet
 	private JComboBox cb1;
 	private JComboBox cb2;
 	private JComboBox cb3;
 	private JComboBox cb4;
 	private JComboBox cb5;
 	
+	// Declaration des interfaces pour rentrer les villes 
 	private JTextField text1;
 	private JTextField text2;
 	
+	// Variables utiles dans differentes sous-classes
 	private JPanel pane1;
 	private JPanel pane2;
 	private String confort;
@@ -46,22 +51,32 @@ public class NouveauBilletPage extends JPanel {
 	private JComboBox Clas;
 	private JComboBox Conf;
 	
+	// Variables pour les chois principaux des utilisateurs
 	private boolean BT;
 	private JPanel mainPane;
 	private CardLayout cards;
 	private Itineraire it;
 
+
+
+	/**
+	 * Contructeur de Billet
+	 */
 	public NouveauBilletPage(Fenetre mainFen) {
+		// Pour rester sur la meme fenetre
 		this.mainFen = mainFen;
+		// Utile pour l'interface utilisateur
 		this.setLayout(new GridLayout(6,10));
 		
+		// Initialise l'itineraire prit par l'utilisateur
 		it = new Itineraire();
 
-		this.pane1 = new JPanel();
+		// Utile pour cacher l'interface Bus ou Train selon le choix de l'utilisateur
 		this.cards = new CardLayout();
 		this.mainPane = new JPanel();
 		this.mainPane.setLayout(this.cards);
 		
+		// Tous les labels utiles pour l'interface
 		JLabel label0 = new JLabel();
 		JLabel label1 = new JLabel("Jour :");
 		JLabel label2 = new JLabel("Mois :");
@@ -74,11 +89,14 @@ public class NouveauBilletPage extends JPanel {
 		JLabel label9 = new JLabel("Classe :");
 		JLabel label10 = new JLabel("Sens :");
 		
-		this.pane1.add(label8);
+		// Initialisation de l'interface Bus
+		this.pane1 = new JPanel();
 		String[] confortTab = {"Faible","Moyen","Haut"};
 		Conf = new JComboBox<Object>(confortTab);
+		this.pane1.add(label8);
 		this.pane1.add(Conf);
 		
+		// Initialisation de l'interface Train
 		this.pane2 = new JPanel();
 		String[] klasse = {"1","2","Business"};
 		String[] cens = {"Vers l'avant","Vers l'arriere"};
@@ -89,10 +107,12 @@ public class NouveauBilletPage extends JPanel {
 		this.pane2.add(label10);
 		this.pane2.add(Sens);
 		
+		// Ajout dans le Panel que l'on montre/cache
 		this.mainPane.add(pane1, "Bus");
 		this.mainPane.add(pane2, "Train");
 		
 			
+		// Initialisation des Boutons, des champs de saisie et des ComboBoxs 
 		JRadioButton bus = new JRadioButton("Bus");
 		JRadioButton train = new JRadioButton("Train");
 		cb1 = new JComboBox(Jours);
@@ -128,6 +148,7 @@ public class NouveauBilletPage extends JPanel {
 		this.add(cb4);
 		this.add(label5);
 		this.add(cb5);
+		
 		// Ligne pour rentrer les villes
 		this.add(label0);
 		this.add(label0);
@@ -139,10 +160,10 @@ public class NouveauBilletPage extends JPanel {
 		this.add(text2);
 		this.add(label0);
 		this.add(label0);
+		
 		// Ligne pour le bus
 		this.add(label0);
 		this.add(bus);
-		this.add(mainPane);
 		this.add(label0);
 		this.add(label0);
 		this.add(label0);
@@ -150,6 +171,8 @@ public class NouveauBilletPage extends JPanel {
 		this.add(label0);
 		this.add(label0);
 		this.add(label0);
+		this.add(label0);
+		
 		// Ligne pour le train
 		this.add(label0);
 		this.add(train);
@@ -161,6 +184,7 @@ public class NouveauBilletPage extends JPanel {
 		this.add(label0);
 		this.add(label0);
 		this.add(label0);
+		
 		// Ligne pour donner de l'espace
 		this.add(label0);
 		this.add(label0);
@@ -172,6 +196,7 @@ public class NouveauBilletPage extends JPanel {
 		this.add(label0);
 		this.add(label0);
 		this.add(label0);
+		
 		// Ligne de boutons de controle de l'interface
 		this.add(label0);
 		this.add(label0);
