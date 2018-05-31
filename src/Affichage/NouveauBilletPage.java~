@@ -104,6 +104,7 @@ public class NouveauBilletPage extends JPanel {
 		text2 = new JTextField("<Saisir la ville d'arrivee>");
 		JButton confirm = new JButton("Confirmer");
 		JButton quit = new JButton("Annuler");
+		
 		JButton addEtape = new JButton("Ajouter l'etape");
 		
 		addEtape.addActionListener(new actionEtape());
@@ -116,6 +117,7 @@ public class NouveauBilletPage extends JPanel {
 		choix.add(bus);
 		choix.add(train);
 		
+		// Ligne pour rentrer la date de depart
 		this.add(label1);
 		this.add(cb1);
 		this.add(label2);
@@ -126,6 +128,7 @@ public class NouveauBilletPage extends JPanel {
 		this.add(cb4);
 		this.add(label5);
 		this.add(cb5);
+		// Ligne pour rentrer les villes
 		this.add(label0);
 		this.add(label0);
 		this.add(label6);
@@ -136,6 +139,7 @@ public class NouveauBilletPage extends JPanel {
 		this.add(text2);
 		this.add(label0);
 		this.add(label0);
+		// Ligne pour le bus
 		this.add(label0);
 		this.add(bus);
 		this.add(mainPane);
@@ -146,6 +150,7 @@ public class NouveauBilletPage extends JPanel {
 		this.add(label0);
 		this.add(label0);
 		this.add(label0);
+		// Ligne pour le train
 		this.add(label0);
 		this.add(train);
 		this.add(mainPane);
@@ -156,6 +161,18 @@ public class NouveauBilletPage extends JPanel {
 		this.add(label0);
 		this.add(label0);
 		this.add(label0);
+		// Ligne pour donner de l'espace
+		this.add(label0);
+		this.add(label0);
+		this.add(label0);
+		this.add(label0);
+		this.add(label0);
+		this.add(label0);
+		this.add(label0);
+		this.add(label0);
+		this.add(label0);
+		this.add(label0);
+		// Ligne de boutons de controle de l'interface
 		this.add(label0);
 		this.add(label0);
 		this.add(addEtape);
@@ -231,7 +248,8 @@ public class NouveauBilletPage extends JPanel {
 			text1.setText(ville2.getName());
 			text2.setText("<Entrez la ville d'arrivee>");
 			
-			JOptionPane valid
+			JOptionPane Validation = new JOptionPane();
+			Validation.showMessageDialog(null,"Etape ajoutee au voyage !","Validation etape",JOptionPane.DEFAULT_OPTION);
 		}
 	}
 	
@@ -298,14 +316,18 @@ public class NouveauBilletPage extends JPanel {
 				billets.ajouterBillet(newBillet);
 				
 				JOptionPane Validation = new JOptionPane();
-				Validation.showMessageDialog(null,"Billet de train valide","Billet n° "+newBillet.getNumero().toString(),JOptionPane.DEFAULT_OPTION);
+				Validation.showMessageDialog(null,"Billet de train valide","Billet n° "+Integer.toString(newBillet.getNumero()),JOptionPane.DEFAULT_OPTION);
+				
+				mainFen.switchPage("GestionBilletPage");
 			} else {
 				confort = Conf.getSelectedItem().toString();
 				BilletBus newBillet = new BilletBus(10 + r.nextInt(120), it, confort);
 				billets.ajouterBillet(newBillet);
 				
 				JOptionPane Validation = new JOptionPane();
-				Validation.showMessageDialog(null,"Billet de bus valide","Billet n° "+newBillet.getNumero().toString(),JOptionPane.DEFAULT_OPTION);
+				Validation.showMessageDialog(null,"Billet de bus valide","Billet n° "+Integer.toString(newBillet.getNumero()),JOptionPane.DEFAULT_OPTION);
+				
+				mainFen.switchPage("GestionBilletPage");
 			}
 		}
 	}
