@@ -103,7 +103,7 @@ public class ConsultationBilletPage extends JPanel {
 		affNumero.add(option2);
 		affNumero.add(text3);
 		affNumero.add(buttonAvant);
-		affNumero.add(empty);
+		affNumero.add(new JLabel());
 		affNumero.add(buttonApres);
 		affNumero.add(lblDateArrivee);
 		affNumero.add(lblDateDepart);

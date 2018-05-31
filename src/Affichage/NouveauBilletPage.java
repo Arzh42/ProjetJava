@@ -77,7 +77,6 @@ public class NouveauBilletPage extends JPanel {
 		this.mainPane.setLayout(this.cards);
 		
 		// Tous les labels utiles pour l'interface
-		JLabel label0 = new JLabel();
 		JLabel label1 = new JLabel("Jour :");
 		JLabel label2 = new JLabel("Mois :");
 		JLabel label3 = new JLabel("Annee :");
@@ -151,63 +150,63 @@ public class NouveauBilletPage extends JPanel {
 		this.add(cb5);
 		
 		// Ligne pour rentrer les villes
-		this.add(label0);
-		this.add(label0);
+		this.add(new JLabel());
+		this.add(new JLabel());
 		this.add(label6);
 		this.add(text1);
-		this.add(label0);
-		this.add(label0);
+		this.add(new JLabel());
+		this.add(new JLabel());
 		this.add(label7);
 		this.add(text2);
-		this.add(label0);
-		this.add(label0);
+		this.add(new JLabel());
+		this.add(new JLabel());
 		
 		// Ligne pour le bus
-		this.add(label0);
+		this.add(new JLabel());
 		this.add(bus);
-		this.add(label0);
-		this.add(label0);
-		this.add(label0);
-		this.add(label0);
-		this.add(label0);
-		this.add(label0);
-		this.add(label0);
-		this.add(label0);
+		this.add(new JLabel());
+		this.add(new JLabel());
+		this.add(new JLabel());
+		this.add(new JLabel());
+		this.add(new JLabel());
+		this.add(new JLabel());
+		this.add(new JLabel());
+		this.add(new JLabel());
 		
 		// Ligne pour le train
-		this.add(label0);
+		this.add(new JLabel());
 		this.add(train);
 		this.add(mainPane);
-		this.add(label0);
-		this.add(label0);
-		this.add(label0);
-		this.add(label0);
-		this.add(label0);
-		this.add(label0);
-		this.add(label0);
+		this.add(new JLabel());
+		this.add(new JLabel());
+		this.add(new JLabel());
+		this.add(new JLabel());
+		this.add(new JLabel());
+		this.add(new JLabel());
+		this.add(new JLabel());
 		
 		// Ligne pour donner de l'espace
-		this.add(label0);
-		this.add(label0);
-		this.add(label0);
-		this.add(label0);
-		this.add(label0);
-		this.add(label0);
-		this.add(label0);
-		this.add(label0);
-		this.add(label0);
-		this.add(label0);
+		this.add(new JLabel());
+		this.add(new JLabel());
+		this.add(new JLabel());
+		this.add(new JLabel());
+		this.add(new JLabel());
+		this.add(new JLabel());
+		this.add(new JLabel());
+		this.add(new JLabel());
+		this.add(new JLabel());
+		this.add(new JLabel());
 		
 		// Ligne de boutons de controle de l'interface
-		this.add(label0);
-		this.add(label0);
+		this.add(new JLabel());
+		this.add(new JLabel());
 		this.add(addEtape);
-		this.add(label0);
-		this.add(label0);
-		this.add(label0);
-		this.add(label0);
+		this.add(new JLabel());
+		this.add(new JLabel());
+		this.add(new JLabel());
+		this.add(new JLabel());
 		this.add(confirm);
-		this.add(label0);
+		this.add(new JLabel());
 		this.add(quit);	
 	}
 	
