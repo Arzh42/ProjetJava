@@ -271,16 +271,24 @@ public class ModifBilletPage extends JPanel {
 	 * @param billet
 	 * Instance de BilletTrain représentant le billet
 	 */
+	public int indexOf(String[] tab,String val) {
+		int i = 0;
+		while(i<tab.length&&tab[i]!=val) {
+			i ++;
+		}
+		return i;
+	}
 	public void afficherBilletTrain(BilletTrain billet) {
-		cb1.setSelectedIndex(billet.getItineraire().dateDepart().getJour());
-		cb2.setSelectedIndex(billet.getItineraire().dateDepart().getMois());
-		cb3.setSelectedIndex(billet.getItineraire().dateDepart().getAnnee());
-		cb4.setSelectedIndex(billet.getItineraire().dateDepart().getHeure());
-		cb5.setSelectedIndex(billet.getItineraire().dateDepart().getMinute());
 		try {
-			itineraire.setText(billet.getItineraire().getAffichage());
-		} catch (ItineraireException e) {
-			itineraire.setText(e.getMessage());
+			cb1.setSelectedIndex(billet.getItineraire().dateDepart().getJour());
+			cb2.setSelectedIndex(billet.getItineraire().dateDepart().getMois());
+			cb3.setSelectedIndex(this.indexOf(Annees, Integer.toString(billet.getItineraire().dateDepart().getAnnee())));
+			cb4.setSelectedIndex(billet.getItineraire().dateDepart().getHeure());
+			cb5.setSelectedIndex(billet.getItineraire().dateDepart().getMinute());
+		} catch (ItineraireException e) {	
+			//En cas d'erreur on affiche une boite de dialogue qui donne l'erreur
+			JOptionPane jop = new JOptionPane();
+			jop.showMessageDialog(null, e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	/**
@@ -289,15 +297,17 @@ public class ModifBilletPage extends JPanel {
 	 * Instance de BilletBus représentant le billet
 	 */
 	public void afficherBilletBus(BilletBus billet) {
-		numero.setText(""+billet.getNumero());
-		prix.setText(""+billet.getPrix());
-		option1.setText(billet.getConfort());
-		option1Text.setText("Confort : ");
-		option2Text.setText("");
 		try {
-			itineraire.setText(billet.getItineraire().getAffichage());
-		} catch (ItineraireException e) {
-			itineraire.setText(e.getMessage());
+
+			cb1.setSelectedIndex(billet.getItineraire().dateDepart().getJour());
+			cb2.setSelectedIndex(billet.getItineraire().dateDepart().getMois());
+			cb3.setSelectedIndex(billet.getItineraire().dateDepart().getAnnee()-2015);
+			cb4.setSelectedIndex(billet.getItineraire().dateDepart().getHeure());
+			cb5.setSelectedIndex(billet.getItineraire().dateDepart().getMinute());
+		} catch (ItineraireException e) {	
+			//En cas d'erreur on affiche une boite de dialogue qui donne l'erreur
+			JOptionPane jop = new JOptionPane();
+			jop.showMessageDialog(null, e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	/**
