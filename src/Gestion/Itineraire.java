@@ -100,10 +100,12 @@ public class Itineraire {
 		Etape tmp = null;
 		int i = 0;
 		if (it.hasNext()) {
+			tmp = it.next();
 			while(it.hasNext()&&i<position) {
 				tmp = it.next();
+				i ++;
 			}
-			if (!it.hasNext()) {
+			if (i<position) {
 				throw new ItineraireException("Elément pas trouvé");
 			}
 			return tmp;

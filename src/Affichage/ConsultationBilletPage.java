@@ -44,6 +44,7 @@ public class ConsultationBilletPage extends JPanel {
 	private JLabel lblDateDepart;
 	private JLabel lblDepart;
 	private JLabel lblArrivee;
+	private Billet billet;
 	/**
 	 * Gère l'affichage de la page de consultation des billets
 	 * @param mainFen
@@ -85,7 +86,9 @@ public class ConsultationBilletPage extends JPanel {
 		JLabel empty = new JLabel();
 		itineraire = new JLabel();
 		buttonAvant = new JButton("Etape précédente");
+		buttonAvant.addActionListener(new actionPrec());
 		buttonApres = new JButton("Etape suivante");
+		buttonApres.addActionListener(new actionSuiv());
 		lblDateArrivee = new JLabel();
 		lblDateDepart = new JLabel();
 		lblDepart = new JLabel();
@@ -120,7 +123,9 @@ public class ConsultationBilletPage extends JPanel {
 		try {
 			//On appelle la fonction getBillet de Billets et on gère les exceptions qu'elle peut lever
 			Billet bill = billets.getBillet(numero);
+			this.billet = bill;
 			if (bill.getClass().equals(BilletTrain.class)) {
+				
 				this.afficherBilletTrain((BilletTrain) bill);
 			}
 			else {
@@ -152,12 +157,19 @@ public class ConsultationBilletPage extends JPanel {
 		option1Text.setText("Sens : ");
 		option2Text.setText("Classe : ");
 		
-		afficherEtape(billet);
+		afficherEtape();
 	}
-	public void afficherEtape(Billet billet) {
+	/**
+	 * Remplie la partie Etape de l'affichage
+	 * @param billet
+	 */
+	public void afficherEtape() {
 		Itineraire it = billet.getItineraire();
 		int i = this.positionEtape%it.nombreEtape();
+		System.out.println(i);
+		System.out.println(it.nombreEtape());
 		try {
+			System.out.println(it.getEtape(i));
 			Date da = it.getEtape(i).getRd1().getDate();
 			lblDateDepart.setText("Départ le "+da.getJour()+"/"+da.getMois()+"/"+da.getAnnee()+" à "+da.getHeure()+"h"+da.getMinute());
 			Date dd = it.getEtape(i).getRd2().getDate();
@@ -166,8 +178,7 @@ public class ConsultationBilletPage extends JPanel {
 			lblArrivee.setText(it.getEtape(i).getRd2().getVille().getName());
 			
 		} catch (ItineraireException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
 		}
 	}
 	/**
@@ -181,7 +192,7 @@ public class ConsultationBilletPage extends JPanel {
 		option1.setText(billet.getConfort());
 		option1Text.setText("Confort : ");
 		option2Text.setText("");
-		afficherEtape(billet);
+		afficherEtape();
 	}
 	/**
 	 * ActionListener du bouton de recherche de billet
@@ -190,6 +201,20 @@ public class ConsultationBilletPage extends JPanel {
 
 		public void actionPerformed(ActionEvent arg0) {
 			rechercherBillet(Integer.parseInt(field.getText()));
+		}
+	}
+	class actionSuiv implements ActionListener {
+
+		public void actionPerformed(ActionEvent arg0) {
+			positionEtape ++;
+			afficherEtape();
+		}
+	}
+	class actionPrec implements ActionListener {
+
+		public void actionPerformed(ActionEvent arg0) {
+			positionEtape --;
+			afficherEtape();
 		}
 	}
 }
