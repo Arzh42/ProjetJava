@@ -94,6 +94,25 @@ public class Itineraire {
 
 		}
 	}
+	public Etape getEtape(int position) throws ItineraireException {
+		Iterator<Etape> it = this.EtapeSet.iterator();
+		boolean find = false;
+		Etape tmp = null;
+		int i = 0;
+		if (it.hasNext()) {
+			while(it.hasNext()&&i<position) {
+				tmp = it.next();
+			}
+			if (!it.hasNext()) {
+				throw new ItineraireException("Elément pas trouvé");
+			}
+			return tmp;
+		}
+		else {
+			throw new ItineraireException("Pas d'élément");
+
+		}
+	}
 	public void modifEtape(Etape e,Etape newEtape) throws ItineraireException {
 		Iterator<Etape> it = this.EtapeSet.iterator();
 		boolean find = false;

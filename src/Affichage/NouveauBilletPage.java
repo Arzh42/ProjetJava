@@ -98,7 +98,7 @@ public class NouveauBilletPage extends JPanel {
 		text2 = new JTextField("<Saisir la ville d'arrivee>");
 		JButton confirm = new JButton("Confirmer");
 		JButton quit = new JButton("Annuler");
-		JButton addEtape = new JButton("Ajouter l'Ã©tape");
+		JButton addEtape = new JButton("Ajouter l'étape");
 		
 		addEtape.addActionListener(new actionEtape());
 		confirm.addActionListener(new actionConfirm());

@@ -1,6 +1,7 @@
 package Affichage;
 
 import java.awt.CardLayout;
+import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -17,6 +18,8 @@ import Gestion.BilletBus;
 import Gestion.BilletException;
 import Gestion.BilletTrain;
 import Gestion.Billets;
+import Gestion.Date;
+import Gestion.Itineraire;
 import Gestion.ItineraireException;
 
 /**
@@ -24,6 +27,7 @@ import Gestion.ItineraireException;
  */
 public class ConsultationBilletPage extends JPanel {
 	private Fenetre mainFen;
+	int positionEtape = 0;
 	private CardLayout layout;
 	private JTextField field;
 	private JLabel numero;
@@ -34,6 +38,12 @@ public class ConsultationBilletPage extends JPanel {
 	private JLabel empty;
 	private JLabel option1Text;
 	private JLabel option2Text;
+	private JButton buttonAvant;
+	private JButton buttonApres;
+	private JLabel lblDateArrivee;
+	private JLabel lblDateDepart;
+	private JLabel lblDepart;
+	private JLabel lblArrivee;
 	/**
 	 * Gère l'affichage de la page de consultation des billets
 	 * @param mainFen
@@ -60,7 +70,7 @@ public class ConsultationBilletPage extends JPanel {
 		
 		//affNumero va afficher les informations du billet
 		JPanel affNumero = new JPanel();
-		affNumero.setLayout(new GridLayout(5,2));
+		affNumero.setLayout(new GridLayout(3,4));
 		
 		
 		JLabel text1 = new JLabel("Numero : ");
@@ -72,9 +82,14 @@ public class ConsultationBilletPage extends JPanel {
 		option2Text = new JLabel("Classe : ");
 		option2 = new JLabel();
 		JLabel text3 = new JLabel("Itinéraire : ");
+		JLabel empty = new JLabel();
 		itineraire = new JLabel();
-		
-		
+		buttonAvant = new JButton("Etape précédente");
+		buttonApres = new JButton("Etape suivante");
+		lblDateArrivee = new JLabel();
+		lblDateDepart = new JLabel();
+		lblDepart = new JLabel();
+		lblArrivee = new JLabel();
 		affNumero.add(text1);
 		affNumero.add(numero);
 		affNumero.add(text2);
@@ -84,7 +99,13 @@ public class ConsultationBilletPage extends JPanel {
 		affNumero.add(option2Text);
 		affNumero.add(option2);
 		affNumero.add(text3);
-		affNumero.add(itineraire);
+		affNumero.add(buttonAvant);
+		affNumero.add(empty);
+		affNumero.add(buttonApres);
+		affNumero.add(lblDateArrivee);
+		affNumero.add(lblDateDepart);
+		affNumero.add(lblDepart);
+		affNumero.add(lblArrivee);
 		
 		this.add(askNumero,"ask");
 		this.add(affNumero, "aff");
@@ -131,10 +152,22 @@ public class ConsultationBilletPage extends JPanel {
 		option1Text.setText("Sens : ");
 		option2Text.setText("Classe : ");
 		
+		afficherEtape(billet);
+	}
+	public void afficherEtape(Billet billet) {
+		Itineraire it = billet.getItineraire();
+		int i = this.positionEtape%it.nombreEtape();
 		try {
-			itineraire.setText(billet.getItineraire().getAffichage());
+			Date da = it.getEtape(i).getRd1().getDate();
+			lblDateDepart.setText("Départ le "+da.getJour()+"/"+da.getMois()+"/"+da.getAnnee()+" à "+da.getHeure()+"h"+da.getMinute());
+			Date dd = it.getEtape(i).getRd2().getDate();
+			lblDateArrivee.setText("Arrivée le "+dd.getJour()+"/"+dd.getMois()+"/"+dd.getAnnee()+" à "+dd.getHeure()+"h"+dd.getMinute());
+			lblDepart.setText(it.getEtape(i).getRd1().getVille().getName());
+			lblArrivee.setText(it.getEtape(i).getRd2().getVille().getName());
+			
 		} catch (ItineraireException e) {
-			itineraire.setText(e.getMessage());
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	/**
@@ -148,11 +181,7 @@ public class ConsultationBilletPage extends JPanel {
 		option1.setText(billet.getConfort());
 		option1Text.setText("Confort : ");
 		option2Text.setText("");
-		try {
-			itineraire.setText(billet.getItineraire().getAffichage());
-		} catch (ItineraireException e) {
-			itineraire.setText(e.getMessage());
-		}
+		afficherEtape(billet);
 	}
 	/**
 	 * ActionListener du bouton de recherche de billet
