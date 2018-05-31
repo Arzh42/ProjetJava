@@ -53,7 +53,7 @@ public class NouveauBilletPage extends JPanel {
 
 	public NouveauBilletPage(Fenetre mainFen) {
 		this.mainFen = mainFen;
-		this.setLayout(new GridLayout(5,4));
+		this.setLayout(new GridLayout(6,10));
 		
 		it = new Itineraire();
 
@@ -62,6 +62,7 @@ public class NouveauBilletPage extends JPanel {
 		this.mainPane = new JPanel();
 		this.mainPane.setLayout(this.cards);
 		
+		JLabel label0 = new JLabel();
 		JLabel label1 = new JLabel("Jour :");
 		JLabel label2 = new JLabel("Mois :");
 		JLabel label3 = new JLabel("Annee :");
@@ -69,7 +70,11 @@ public class NouveauBilletPage extends JPanel {
 		JLabel label5 = new JLabel("Minute :");
 		JLabel label6 = new JLabel("Depart :");
 		JLabel label7 = new JLabel("Arrivee :");
+		JLabel label8 = new JLabel("Confort :");
+		JLabel label9 = new JLabel("Classe :");
+		JLabel label10 = new JLabel("Sens :");
 		
+		this.pane1.add(label8);
 		String[] confortTab = {"Faible","Moyen","Haut"};
 		Conf = new JComboBox<Object>(confortTab);
 		this.pane1.add(Conf);
@@ -79,14 +84,15 @@ public class NouveauBilletPage extends JPanel {
 		String[] cens = {"Vers l'avant","Vers l'arriere"};
 		Clas = new JComboBox(klasse);
 		Sens = new JComboBox(cens);
+		this.pane2.add(label9);
 		this.pane2.add(Clas);
+		this.pane2.add(label10);
 		this.pane2.add(Sens);
 		
 		this.mainPane.add(pane1, "Bus");
 		this.mainPane.add(pane2, "Train");
 		
-		
-		
+			
 		JRadioButton bus = new JRadioButton("Bus");
 		JRadioButton train = new JRadioButton("Train");
 		cb1 = new JComboBox(Jours);
@@ -98,7 +104,7 @@ public class NouveauBilletPage extends JPanel {
 		text2 = new JTextField("<Saisir la ville d'arrivee>");
 		JButton confirm = new JButton("Confirmer");
 		JButton quit = new JButton("Annuler");
-		JButton addEtape = new JButton("Ajouter l'étape");
+		JButton addEtape = new JButton("Ajouter l'etape");
 		
 		addEtape.addActionListener(new actionEtape());
 		confirm.addActionListener(new actionConfirm());
@@ -120,15 +126,45 @@ public class NouveauBilletPage extends JPanel {
 		this.add(cb4);
 		this.add(label5);
 		this.add(cb5);
+		this.add(label0);
+		this.add(label0);
 		this.add(label6);
 		this.add(text1);
+		this.add(label0);
+		this.add(label0);
 		this.add(label7);
 		this.add(text2);
+		this.add(label0);
+		this.add(label0);
+		this.add(label0);
 		this.add(bus);
+		this.add(mainPane);
+		this.add(label0);
+		this.add(label0);
+		this.add(label0);
+		this.add(label0);
+		this.add(label0);
+		this.add(label0);
+		this.add(label0);
+		this.add(label0);
 		this.add(train);
 		this.add(mainPane);
+		this.add(label0);
+		this.add(label0);
+		this.add(label0);
+		this.add(label0);
+		this.add(label0);
+		this.add(label0);
+		this.add(label0);
+		this.add(label0);
+		this.add(label0);
 		this.add(addEtape);
+		this.add(label0);
+		this.add(label0);
+		this.add(label0);
+		this.add(label0);
 		this.add(confirm);
+		this.add(label0);
 		this.add(quit);	
 	}
 	
@@ -187,12 +223,15 @@ public class NouveauBilletPage extends JPanel {
 			Etape etape1 = new Etape(rd1,rd2);
 			it.ajouterEtape(etape1);
 			
-			cb1.setSelectedIndex(jour-1);	
-			cb2.setSelectedIndex(mois-1);
-			cb3.setSelectedIndex(annee-2015);
-			cb4.setSelectedIndex(heure);
-			cb5.setSelectedIndex(minute/5);
+			cb1.setSelectedIndex(jour2-1);	
+			cb2.setSelectedIndex(mois2-1);
+			cb3.setSelectedIndex(annee2-2015);
+			cb4.setSelectedIndex(heure2);
+			cb5.setSelectedIndex(minute2/5);
 			text1.setText(ville2.getName());
+			text2.setText("<Entrez la ville d'arrivee>");
+			
+			JOptionPane valid
 		}
 	}
 	
@@ -257,10 +296,16 @@ public class NouveauBilletPage extends JPanel {
 				}
 				BilletTrain newBillet = new BilletTrain(60 + r.nextInt(500), it, classe, sens);
 				billets.ajouterBillet(newBillet);
+				
+				JOptionPane Validation = new JOptionPane();
+				Validation.showMessageDialog(null,"Billet de train valide","Billet n° "+newBillet.getNumero().toString(),JOptionPane.DEFAULT_OPTION);
 			} else {
-			confort = Conf.getSelectedItem().toString();
+				confort = Conf.getSelectedItem().toString();
 				BilletBus newBillet = new BilletBus(10 + r.nextInt(120), it, confort);
 				billets.ajouterBillet(newBillet);
+				
+				JOptionPane Validation = new JOptionPane();
+				Validation.showMessageDialog(null,"Billet de bus valide","Billet n° "+newBillet.getNumero().toString(),JOptionPane.DEFAULT_OPTION);
 			}
 		}
 	}
