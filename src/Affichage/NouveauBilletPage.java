@@ -69,7 +69,11 @@ public class NouveauBilletPage extends JPanel {
 		JLabel label5 = new JLabel("Minute :");
 		JLabel label6 = new JLabel("Depart :");
 		JLabel label7 = new JLabel("Arrivee :");
+		JLabel label8 = new JLabel("Confort :");
+		JLabel label9 = new JLabel("Classe :");
+		JLabel label10 = new JLabel("Sens :");
 		
+		this.pane1.add(label8);
 		String[] confortTab = {"Faible","Moyen","Haut"};
 		Conf = new JComboBox<Object>(confortTab);
 		this.pane1.add(Conf);
@@ -79,14 +83,15 @@ public class NouveauBilletPage extends JPanel {
 		String[] cens = {"Vers l'avant","Vers l'arriere"};
 		Clas = new JComboBox(klasse);
 		Sens = new JComboBox(cens);
+		this.pane2.add(label9);
 		this.pane2.add(Clas);
+		this.pane2.add(label10);
 		this.pane2.add(Sens);
 		
 		this.mainPane.add(pane1, "Bus");
 		this.mainPane.add(pane2, "Train");
 		
-		
-		
+			
 		JRadioButton bus = new JRadioButton("Bus");
 		JRadioButton train = new JRadioButton("Train");
 		cb1 = new JComboBox(Jours);
@@ -98,7 +103,7 @@ public class NouveauBilletPage extends JPanel {
 		text2 = new JTextField("<Saisir la ville d'arrivee>");
 		JButton confirm = new JButton("Confirmer");
 		JButton quit = new JButton("Annuler");
-		JButton addEtape = new JButton("Ajouter l'étape");
+		JButton addEtape = new JButton("Ajouter l'etape");
 		
 		addEtape.addActionListener(new actionEtape());
 		confirm.addActionListener(new actionConfirm());
@@ -258,10 +263,16 @@ public class NouveauBilletPage extends JPanel {
 				}
 				BilletTrain newBillet = new BilletTrain(60 + r.nextInt(500), it, classe, sens);
 				billets.ajouterBillet(newBillet);
+				
+				JOptionPane Validation = new JOptionPane();
+				jop.showMessageDialog(null,"Billet de train valide","Billet n° "+newBillet.getNumero().toString(),JOptionPane.DEFAULT_OPTION);
 			} else {
-			confort = Conf.getSelectedItem().toString();
+				confort = Conf.getSelectedItem().toString();
 				BilletBus newBillet = new BilletBus(10 + r.nextInt(120), it, confort);
 				billets.ajouterBillet(newBillet);
+				
+				JOptionPane Validation = new JOptionPane();
+				jop.showMessageDialog(null,"Billet de bus valide","Billet n° "+newBillet.getNumero().toString(),JOptionPane.DEFAULT_OPTION);
 			}
 		}
 	}
