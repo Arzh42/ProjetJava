@@ -71,7 +71,7 @@ public class ConsultationBilletPage extends JPanel {
 		
 		//affNumero va afficher les informations du billet
 		JPanel affNumero = new JPanel();
-		affNumero.setLayout(new GridLayout(3,4));
+		affNumero.setLayout(new GridLayout(4,2));
 		
 		
 		JLabel text1 = new JLabel("Numero : ");
@@ -166,10 +166,7 @@ public class ConsultationBilletPage extends JPanel {
 	public void afficherEtape() {
 		Itineraire it = billet.getItineraire();
 		int i = this.positionEtape%it.nombreEtape();
-		System.out.println(i);
-		System.out.println(it.nombreEtape());
 		try {
-			System.out.println(it.getEtape(i));
 			Date da = it.getEtape(i).getRd1().getDate();
 			lblDateDepart.setText("Départ le "+da.getJour()+"/"+da.getMois()+"/"+da.getAnnee()+" à "+da.getHeure()+"h"+da.getMinute());
 			Date dd = it.getEtape(i).getRd2().getDate();
