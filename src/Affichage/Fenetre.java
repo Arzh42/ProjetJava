@@ -28,7 +28,7 @@ public class Fenetre extends JFrame {
 	ConsultationBilletPage ConsultationBilletPage = new ConsultationBilletPage(this);
 	ModifBilletPage ModifBillet = new ModifBilletPage(this);
 	AnnulationBilletPage AnnulationBilletPage = new AnnulationBilletPage(this);
-	Billets billets = new Billets();
+	Billets billets;
 
 	public Fenetre() {
 		//On créé une barre de menu

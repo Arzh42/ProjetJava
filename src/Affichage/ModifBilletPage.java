@@ -40,6 +40,9 @@ public class ModifBilletPage extends JPanel {
 	private Billets billets;
 	private Fenetre mainFen;
 	
+	private BilletBus billetBus;
+	private BilletTrain billetTrain;
+	
 	private String[] Jours = {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"};
 	private String[] Mois = {"Janvier","Fevrier","Mars","Avril","Mai","Juin","Juillet","Aout","Septembre","Octobre","Novembre","Decembre"};
 	private String[] Annees = {"2015","2016","2017","2018","2019","2020","2021","2022","2023","2024","2025"};
@@ -66,6 +69,7 @@ public class ModifBilletPage extends JPanel {
 	
 	private boolean BT;
 	private JPanel mainPane;
+	private JPanel modifPan;
 	private CardLayout cards;
 	private CardLayout layout;
 	private JTextField field;
@@ -77,8 +81,8 @@ public class ModifBilletPage extends JPanel {
 		this.setLayout(this.layout);
 		
 		
-		JPanel modifPan = new JPanel();
-		modifPan.setLayout(new GridLayout(5,4));
+		this.modifPan = new JPanel();
+		this.modifPan.setLayout(new GridLayout(5,4));
 
 		JPanel askNumero = new JPanel();
 		
@@ -164,7 +168,7 @@ public class ModifBilletPage extends JPanel {
 		modifPan.add(quit);	
 		
 		this.add(askNumero, "ask");
-		this.add(modifPan,"Modification");
+		this.add(modifPan,"modif");
 	
 	}
 
@@ -227,11 +231,21 @@ public class ModifBilletPage extends JPanel {
 			it.ajouterEtape(etape1);
 		
 			if(BT){
-				BilletTrain newBillet = new BilletTrain(60 + r.nextInt(500), it, classe, sens);
-				billets.ajouterBillet(newBillet);
+				classe = Clas.getSelectedItem().toString();
+				if(Sens.getSelectedIndex() == 0){
+					sens = true;
+				} else {
+					sens = false;
+				}
+				billetTrain.setItineraire(it);
+				billetTrain.setPrix(10 + r.nextInt(120));
+				billetTrain.setClasse(classe);
+				billetTrain.setSens(sens);
 			} else {
-				BilletBus newBillet = new BilletBus(10 + r.nextInt(120), it, confort);
-				billets.ajouterBillet(newBillet);
+				confort = Conf.getSelectedItem().toString();
+				billetBus.setItineraire(it);
+				billetBus.setPrix(10 + r.nextInt(120));
+				billetBus.setConfort(confort);
 			}
 		}
 	}
@@ -248,9 +262,11 @@ public class ModifBilletPage extends JPanel {
 			//On appelle la fonction getBillet de Billets et on gère les exceptions qu'elle peut lever
 			Billet bill = billets.getBillet(numero);
 			if (bill.getClass().equals(BilletTrain.class)) {
+				this.billetTrain = (BilletTrain) bill;
 				this.afficherBilletTrain((BilletTrain) bill);
 			}
 			else {
+				this.billetBus = (BilletBus) bill;
 				this.afficherBilletBus((BilletBus) bill);
 			}
 			//On change la page à afficher
@@ -266,11 +282,7 @@ public class ModifBilletPage extends JPanel {
 	public void reload() {
 		this.layout.show(this, "ask");
 	}
-	/**
-	 * Permet d'afficher un billet de train
-	 * @param billet
-	 * Instance de BilletTrain représentant le billet
-	 */
+	
 	public int indexOf(String[] tab,String val) {
 		int i = 0;
 		while(i<tab.length&&tab[i]!=val) {
@@ -278,14 +290,20 @@ public class ModifBilletPage extends JPanel {
 		}
 		return i;
 	}
+	/**
+	 * Permet d'afficher un billet de train
+	 * @param billet
+	 * Instance de BilletTrain représentant le billet
+	 */
 	public void afficherBilletTrain(BilletTrain billet) {
 		try {
 			cb1.setSelectedIndex(billet.getItineraire().dateDepart().getJour());
 			cb2.setSelectedIndex(billet.getItineraire().dateDepart().getMois());
-			cb3.setSelectedIndex(this.indexOf(Annees, Integer.toString(billet.getItineraire().dateDepart().getAnnee())));
+			cb3.setSelectedIndex(billet.getItineraire().dateDepart().getAnnee()-2015);
 			cb4.setSelectedIndex(billet.getItineraire().dateDepart().getHeure());
 			cb5.setSelectedIndex(billet.getItineraire().dateDepart().getMinute());
-		} catch (ItineraireException e) {	
+			layout.show(this, "modif");
+		} catch (ItineraireException e) {
 			//En cas d'erreur on affiche une boite de dialogue qui donne l'erreur
 			JOptionPane jop = new JOptionPane();
 			jop.showMessageDialog(null, e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
@@ -304,6 +322,7 @@ public class ModifBilletPage extends JPanel {
 			cb3.setSelectedIndex(billet.getItineraire().dateDepart().getAnnee()-2015);
 			cb4.setSelectedIndex(billet.getItineraire().dateDepart().getHeure());
 			cb5.setSelectedIndex(billet.getItineraire().dateDepart().getMinute());
+			layout.show(this, "modif");
 		} catch (ItineraireException e) {	
 			//En cas d'erreur on affiche une boite de dialogue qui donne l'erreur
 			JOptionPane jop = new JOptionPane();
