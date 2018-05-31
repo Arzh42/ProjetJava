@@ -49,10 +49,13 @@ public class NouveauBilletPage extends JPanel {
 	private boolean BT;
 	private JPanel mainPane;
 	private CardLayout cards;
+	private Itineraire it;
 
 	public NouveauBilletPage(Fenetre mainFen) {
 		this.mainFen = mainFen;
 		this.setLayout(new GridLayout(5,4));
+		
+		it = new Itineraire();
 
 		this.pane1 = new JPanel();
 		this.cards = new CardLayout();
@@ -95,7 +98,9 @@ public class NouveauBilletPage extends JPanel {
 		text2 = new JTextField("<Saisir la ville d'arrivee>");
 		JButton confirm = new JButton("Confirmer");
 		JButton quit = new JButton("Annuler");
+		JButton addEtape = new JButton("Ajouter l'étape");
 		
+		addEtape.addActionListener(new actionEtape());
 		confirm.addActionListener(new actionConfirm());
 		quit.addActionListener(new actionQuit());
 		bus.addActionListener(new actionBus());
@@ -122,6 +127,7 @@ public class NouveauBilletPage extends JPanel {
 		this.add(bus);
 		this.add(train);
 		this.add(mainPane);
+		this.add(addEtape);
 		this.add(confirm);
 		this.add(quit);	
 	}
@@ -130,8 +136,68 @@ public class NouveauBilletPage extends JPanel {
 		this.billets = billets;
 	}
 	
+	class actionEtape implements ActionListener {
+		public void actionPerformed(ActionEvent arg0){
+			Random r = new Random();
+		
+			int jour = cb1.getSelectedIndex()+1;
+			int mois = cb2.getSelectedIndex()+1;
+			int annee = cb3.getSelectedIndex()+2015;
+			int heure = cb4.getSelectedIndex();
+			int minute = cb5.getSelectedIndex()*5;
+			int minute2 = minute;
+			int heure2 = heure+r.nextInt(24);
+			int jour2 = 0;
+			int mois2 = 0;
+			int annee2 = 0;
+			if(heure2 >= 24){
+				heure2 = heure2 % 24;
+				jour2 = jour + 1 + r.nextInt(2);
+				if(jour2 >= 32){
+					mois2 = mois + 1;
+					if(mois2 >= 13){
+						mois2 = 1;
+						annee2 = annee + 1;
+					}
+				} else {
+					mois2 = mois;
+					annee2 = annee;
+				}
+			} else {
+				jour2 = jour + r.nextInt(2);
+				if(jour2 >= 32){
+					mois2 = mois + 1;
+					if(mois2 >= 13){
+						mois2 = 1;
+						annee2 = annee + 1;
+					}
+				} else {
+					mois2 = mois;
+					annee2 = annee;
+				}
+			}
+			
+			Date date1 = new Date(jour, mois, annee, heure, minute, 0);
+			Ville ville1 = new Ville(text1.getText());
+			Date date2 = new Date(jour2, mois2, annee2, heure2, minute2, 0);
+			Ville ville2 = new Ville(text2.getText());
+			
+			RendezVous rd1 = new RendezVous(date1,ville1);
+			RendezVous rd2 = new RendezVous(date2,ville2);
+			Etape etape1 = new Etape(rd1,rd2);
+			it.ajouterEtape(etape1);
+			
+			cb1.setSelectedIndex(jour-1);	
+			cb2.setSelectedIndex(mois-1);
+			cb3.setSelectedIndex(annee-2015);
+			cb4.setSelectedIndex(heure);
+			cb5.setSelectedIndex(minute/5);
+			text1.setText(ville2.getName());
+		}
+	}
+	
 	class actionConfirm implements ActionListener {
-		public void actionPerformed(ActionEvent e){
+		public void actionPerformed(ActionEvent arg0){
 			
 			Random r = new Random();
 			
@@ -180,8 +246,6 @@ public class NouveauBilletPage extends JPanel {
 			RendezVous rd1 = new RendezVous(date1,ville1);
 			RendezVous rd2 = new RendezVous(date2,ville2);
 			Etape etape1 = new Etape(rd1,rd2);
-			
-			Itineraire it = new Itineraire();
 			it.ajouterEtape(etape1);
 		
 			if(BT){
