@@ -66,7 +66,7 @@ public class NouveauBilletPage extends JPanel {
 		// Pour rester sur la meme fenetre
 		this.mainFen = mainFen;
 		// Utile pour l'interface utilisateur
-		this.setLayout(new GridLayout(5,6));
+		this.setLayout(new GridLayout(5,5));
 		
 		// Initialise l'itineraire prit par l'utilisateur
 		it = new Itineraire();
@@ -148,20 +148,17 @@ public class NouveauBilletPage extends JPanel {
 		this.add(new JLabel());
 		this.add(addEtape);
 		this.add(confirm);
-		this.add(quit);	
 		
 		this.add(label2);
 		this.add(cb2);
 		this.add(bus);
 		this.add(new JLabel());
-		this.add(new JLabel());
-		this.add(new JLabel());
+		this.add(quit);
 		
 		this.add(label3);
 		this.add(cb3);
 		this.add(train);
 		this.add(mainPane);
-		this.add(new JLabel());
 		this.add(new JLabel());
 		
 		this.add(label4);
@@ -169,13 +166,11 @@ public class NouveauBilletPage extends JPanel {
 		this.add(label6);
 		this.add(text1);
 		this.add(new JLabel());
-		this.add(new JLabel());
 		
 		this.add(label5);
 		this.add(cb5);
 		this.add(label7);
 		this.add(text2);
-		this.add(new JLabel());
 		this.add(new JLabel());
 	}
 	
@@ -266,7 +261,7 @@ public class NouveauBilletPage extends JPanel {
 	 */
 	class actionConfirm implements ActionListener {
 		public void actionPerformed(ActionEvent arg0){
-			/*
+
 			Random r = new Random();
 			
 			int jour = cb1.getSelectedIndex()+1;
@@ -315,7 +310,7 @@ public class NouveauBilletPage extends JPanel {
 			RendezVous rd2 = new RendezVous(date2,ville2);
 			Etape etape1 = new Etape(rd1,rd2);
 			it.ajouterEtape(etape1);
-			*/
+
 			
 			// On teste si l'utilisateur veut un billet de train ou de bus
 			if(BT){

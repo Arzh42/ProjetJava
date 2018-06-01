@@ -2,7 +2,7 @@ package Gestion;
 
 
 /**
- *Représente un billet de train
+ *Reprï¿½sente un billet de train
  */
 public class BilletTrain extends Billet {
 	private String classe;

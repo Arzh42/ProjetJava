@@ -154,7 +154,7 @@ public class NouveauBilletPage extends JPanel {
 		this.add(cb2);
 		this.add(bus);
 		this.add(new JLabel());
-		this.add(new JLabel());
+		this.add(quit);
 		this.add(new JLabel());
 		
 		this.add(label3);
@@ -166,80 +166,17 @@ public class NouveauBilletPage extends JPanel {
 		
 		this.add(label4);
 		this.add(cb4);
-<<<<<<< HEAD
-=======
-		this.add(label5);
-		this.add(cb5);
-		
-		// Ligne pour rentrer les villes
-		this.add(new JLabel());
-		this.add(new JLabel());
->>>>>>> d03be45001d713798cd1247107e8953656becf5a
 		this.add(label6);
 		this.add(text1);
 		this.add(new JLabel());
 		this.add(new JLabel());
-<<<<<<< HEAD
 		
 		this.add(label5);
 		this.add(cb5);
-=======
->>>>>>> d03be45001d713798cd1247107e8953656becf5a
 		this.add(label7);
 		this.add(text2);
 		this.add(new JLabel());
 		this.add(new JLabel());
-<<<<<<< HEAD
-=======
-		
-		// Ligne pour le bus
-		this.add(new JLabel());
-		this.add(bus);
-		this.add(new JLabel());
-		this.add(new JLabel());
-		this.add(new JLabel());
-		this.add(new JLabel());
-		this.add(new JLabel());
-		this.add(new JLabel());
-		this.add(new JLabel());
-		this.add(new JLabel());
-		
-		// Ligne pour le train
-		this.add(new JLabel());
-		this.add(train);
-		this.add(mainPane);
-		this.add(new JLabel());
-		this.add(new JLabel());
-		this.add(new JLabel());
-		this.add(new JLabel());
-		this.add(new JLabel());
-		this.add(new JLabel());
-		this.add(new JLabel());
-		
-		// Ligne pour donner de l'espace
-		this.add(new JLabel());
-		this.add(new JLabel());
-		this.add(new JLabel());
-		this.add(new JLabel());
-		this.add(new JLabel());
-		this.add(new JLabel());
-		this.add(new JLabel());
-		this.add(new JLabel());
-		this.add(new JLabel());
-		this.add(new JLabel());
-		
-		// Ligne de boutons de controle de l'interface
-		this.add(new JLabel());
-		this.add(new JLabel());
-		this.add(addEtape);
-		this.add(new JLabel());
-		this.add(new JLabel());
-		this.add(new JLabel());
-		this.add(new JLabel());
-		this.add(confirm);
-		this.add(new JLabel());
-		this.add(quit);	
->>>>>>> d03be45001d713798cd1247107e8953656becf5a
 	}
 	
 	public void initBillet(Billets billets){

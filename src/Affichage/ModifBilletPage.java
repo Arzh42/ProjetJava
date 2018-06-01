@@ -34,7 +34,7 @@ import Gestion.RendezVous;
 import Gestion.Ville;
 
 /**
- * Gère la page de modification d'un billet
+ * Gere la page de modification d'un billet
  */
 public class ModifBilletPage extends JPanel {
 	private Billets billets;
@@ -73,21 +73,22 @@ public class ModifBilletPage extends JPanel {
 	private CardLayout cards;
 	private CardLayout layout;
 	private JTextField field;
+	private int positionEtape = 0;
+	private int numero;
 	
 	public ModifBilletPage(Fenetre mainFen) {
 		this.mainFen = mainFen;
 		
 		this.layout = new CardLayout();
 		this.setLayout(this.layout);
-		
-		
+
 		this.modifPan = new JPanel();
 		this.modifPan.setLayout(new GridLayout(5,4));
 
 		JPanel askNumero = new JPanel();
 		
 		JLabel text = new JLabel("Numero du billet : ");
-		field = new JTextField("Numéro du billet"); 
+		field = new JTextField("Numï¿½ro du billet"); 
 		JButton action = new JButton("Chercher");
 		action.addActionListener(new chercherBillet());
 		
@@ -124,8 +125,6 @@ public class ModifBilletPage extends JPanel {
 		this.mainPane.add(pane1, "Bus");
 		this.mainPane.add(pane2, "Train");
 		
-		
-		
 		JRadioButton bus = new JRadioButton("Bus");
 		JRadioButton train = new JRadioButton("Train");
 		cb1 = new JComboBox(Jours);
@@ -135,6 +134,7 @@ public class ModifBilletPage extends JPanel {
 		cb5 = new JComboBox(Minutes);
 		text1 = new JTextField("<Saisir la ville de depart>");
 		text2 = new JTextField("<Saisir la ville d'arrivee>");
+		JButton ModifEtape = new JButton("Modifier");
 		JButton confirm = new JButton("Confirmer");
 		JButton quit = new JButton("Annuler");
 		
@@ -146,30 +146,45 @@ public class ModifBilletPage extends JPanel {
 		ButtonGroup choix = new ButtonGroup();
 		choix.add(bus);
 		choix.add(train);
-		
-		modifPan.add(label1);
-		modifPan.add(cb1);
-		modifPan.add(label2);
-		modifPan.add(cb2);
-		modifPan.add(label3);
-		modifPan.add(cb3);
-		modifPan.add(label4);
-		modifPan.add(cb4);
-		modifPan.add(label5);
-		modifPan.add(cb5);
-		modifPan.add(label6);
-		modifPan.add(text1);
-		modifPan.add(label7);
-		modifPan.add(text2);
-		modifPan.add(bus);
-		modifPan.add(train);
-		modifPan.add(mainPane);
-		modifPan.add(confirm);
-		modifPan.add(quit);	
+
+		this.modifPan.add(label1);
+		this.modifPan.add(cb1);
+		this.modifPan.add(new JLabel());
+		this.modifPan.add(ModifEtape);
+		this.modifPan.add(confirm);
+
+		this.modifPan.add(label2);
+		this.modifPan.add(cb2);
+		this.modifPan.add(bus);
+		this.modifPan.add(new JLabel());
+		this.modifPan.add(quit);
+
+		this.modifPan.add(label3);
+		this.modifPan.add(cb3);
+		this.modifPan.add(train);
+		this.modifPan.add(mainPane);
+		this.modifPan.add(new JLabel());
+
+		this.modifPan.add(label4);
+		this.modifPan.add(cb4);
+		this.modifPan.add(label6);
+		this.modifPan.add(text1);
+		this.modifPan.add(new JLabel());
+
+		this.modifPan.add(label5);
+		this.modifPan.add(cb5);
+		this.modifPan.add(label7);
+		this.modifPan.add(text2);
+		this.modifPan.add(new JLabel());
 		
 		this.add(askNumero, "ask");
 		this.add(modifPan,"modif");
-	
+	}
+
+	class change implements ActionListener {
+		public void actionPerformed(ActionEvent e){
+
+		}
 	}
 
 	public void initBillet(Billets billets){
@@ -229,23 +244,39 @@ public class ModifBilletPage extends JPanel {
 			
 			Itineraire it = new Itineraire();
 			it.ajouterEtape(etape1);
-		
+			initBillet(billets);
+
 			if(BT){
+				// Recuperation des informations relatives au train
 				classe = Clas.getSelectedItem().toString();
 				if(Sens.getSelectedIndex() == 0){
 					sens = true;
 				} else {
 					sens = false;
 				}
-				billetTrain.setItineraire(it);
-				billetTrain.setPrix(10 + r.nextInt(120));
-				billetTrain.setClasse(classe);
-				billetTrain.setSens(sens);
+				// On ajoute un nouveau billet de train avec prix aleatoire
+				BilletTrain newBillet = new BilletTrain(60 + r.nextInt(it.nombreEtape()*50), it, classe, sens);
+				billets.ajouterBillet(newBillet);
+
+				// Pour etre sur de la validation du billet, une fenetre apparait avec le numero dans le titre de la fenetre pour pouvoir aller le consulter
+				JOptionPane Validation = new JOptionPane();
+				Validation.showMessageDialog(null,"Billet de train valide","Billet num : "+Integer.toString(newBillet.getNumero()),JOptionPane.DEFAULT_OPTION);
+
+				// On revient sur la page de gestion des billets
+				mainFen.switchPage("GestionBilletPage");
 			} else {
+				// Recuperation des informations relatives au bus
 				confort = Conf.getSelectedItem().toString();
-				billetBus.setItineraire(it);
-				billetBus.setPrix(10 + r.nextInt(120));
-				billetBus.setConfort(confort);
+				// On ajoute un nouveau billet de bus avec prix aleatoire
+				BilletBus newBillet = new BilletBus(10 + r.nextInt(it.nombreEtape()*20), it, confort);
+				billets.ajouterBillet(newBillet);
+
+				// Pour etre sur de la validation du billet, une fenetre apparait avec le numero dans le titre de la fenetre pour pouvoir aller le consulter
+				JOptionPane Validation = new JOptionPane();
+				Validation.showMessageDialog(null,"Billet de bus valide","Billet nÂ° "+Integer.toString(newBillet.getNumero()),JOptionPane.DEFAULT_OPTION);
+
+				// On revient sur la page de gestion des billets
+				mainFen.switchPage("GestionBilletPage");
 			}
 		}
 	}
@@ -254,12 +285,12 @@ public class ModifBilletPage extends JPanel {
 	/**
 	 * Cherche un billet et appelle la fonction afficherBillet(bus ou train) avec ce billet
 	 * @param numero
-	 * Correspond au numéro du billet à rechercher
+	 * Correspond au numï¿½ro du billet ï¿½ rechercher
 	 */
 	public void rechercherBillet(int numero) {
 		Billets billets = this.mainFen.getBillets();
 		try {
-			//On appelle la fonction getBillet de Billets et on gère les exceptions qu'elle peut lever
+			//On appelle la fonction getBillet de Billets et on gï¿½re les exceptions qu'elle peut lever
 			Billet bill = billets.getBillet(numero);
 			if (bill.getClass().equals(BilletTrain.class)) {
 				this.billetTrain = (BilletTrain) bill;
@@ -269,7 +300,7 @@ public class ModifBilletPage extends JPanel {
 				this.billetBus = (BilletBus) bill;
 				this.afficherBilletBus((BilletBus) bill);
 			}
-			//On change la page à afficher
+			//On change la page ï¿½ afficher
 			this.layout.show(this,"aff");
 			
 		}
@@ -285,7 +316,7 @@ public class ModifBilletPage extends JPanel {
 	
 	public int indexOf(String[] tab,String val) {
 		int i = 0;
-		while(i<tab.length&&tab[i]!=val) {
+		while(i<tab.length && tab[i]!=val) {
 			i ++;
 		}
 		return i;
@@ -293,7 +324,7 @@ public class ModifBilletPage extends JPanel {
 	/**
 	 * Permet d'afficher un billet de train
 	 * @param billet
-	 * Instance de BilletTrain représentant le billet
+	 * Instance de BilletTrain reprï¿½sentant le billet
 	 */
 	public void afficherBilletTrain(BilletTrain billet) {
 		try {
@@ -312,7 +343,7 @@ public class ModifBilletPage extends JPanel {
 	/**
 	 * Permet d'afficher un billet de bus
 	 * @param billet
-	 * Instance de BilletBus représentant le billet
+	 * Instance de BilletBus reprï¿½sentant le billet
 	 */
 	public void afficherBilletBus(BilletBus billet) {
 		try {
@@ -323,12 +354,13 @@ public class ModifBilletPage extends JPanel {
 			cb4.setSelectedIndex(billet.getItineraire().dateDepart().getHeure());
 			cb5.setSelectedIndex(billet.getItineraire().dateDepart().getMinute());
 			layout.show(this, "modif");
-		} catch (ItineraireException e) {	
+		} catch (ItineraireException e) {
 			//En cas d'erreur on affiche une boite de dialogue qui donne l'erreur
 			JOptionPane jop = new JOptionPane();
 			jop.showMessageDialog(null, e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
 		}
 	}
+
 	/**
 	 * ActionListener du bouton de recherche de billet
 	 */
@@ -336,6 +368,7 @@ public class ModifBilletPage extends JPanel {
 
 		public void actionPerformed(ActionEvent arg0) {
 			rechercherBillet(Integer.parseInt(field.getText()));
+			numero = Integer.parseInt(field.getText());
 		}
 	}
 	

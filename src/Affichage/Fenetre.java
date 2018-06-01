@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 
 import Gestion.*;
 /**
- * Gère l'affichage global du système de gestion de billet
+ * Gere l'affichage global du systeme de gestion de billet
  */
 public class Fenetre extends JFrame {
 	JPanel mainPanel;
@@ -30,17 +30,18 @@ public class Fenetre extends JFrame {
 	AnnulationBilletPage AnnulationBilletPage = new AnnulationBilletPage(this);
 	Billets billets;
 
+	/**
+	 * Constructeur de la classe fenetre
+	 */
 	public Fenetre() {
-		//On créé une barre de menu
+		//On cree une barre de menu
 		JMenuBar menuBar = new JMenuBar();
-		
 		JButton gestionBut = new JButton("GestionBillet");
 		gestionBut.addActionListener(new retourGestion());
-		
 		JButton statBut = new JButton("Statistique");
 		statBut.addActionListener(new retourStat());
 		
-		JLabel credit = new JLabel("Créé par Hugo Chataigner et Loulou Piton");
+		JLabel credit = new JLabel("Cree par Hugo Chataigner et Louis-Maxime Piton");
 		
 		menuBar.add(statBut);
 		menuBar.add(gestionBut);
@@ -50,24 +51,24 @@ public class Fenetre extends JFrame {
 		this.billets = new Billets();
 		Itineraire it = new Itineraire();
 		RendezVous rd1 = new RendezVous(new Date(10, 10, 2015,10,10,0),new Ville("Brest"));
-		RendezVous rd2 = new RendezVous(new Date(10, 10, 2015,10,10,0),new Ville("Mushroom kingdom"));
+		RendezVous rd2 = new RendezVous(new Date(10, 10, 2015,10,10,0),new Ville("Troyes"));
 		it.ajouterEtape(new Etape(rd1,rd2));
-		this.billets.ajouterBillet(new BilletBus(10,it,"confort"));
+		this.billets.ajouterBillet(new BilletBus(10,it,"Faible"));
 		this.billets.ajouterBillet(new BilletTrain(10,it,"Business",true));
 		
-		//Configuration de la fenêtre
-		this.setTitle("Ultra Gestionnator of Train and Bus Billet");
-		this.setSize(500, 500);
+		//Configuration de la fenetre
+		this.setTitle("Gestionnaire de billets de train et de bus");
+		this.setSize(600, 600);
 		this.setLocationRelativeTo(null);
 		
-		//On prend un CardLayout car il y a plusieurs page à afficher
+		//On prend un CardLayout car il y a plusieurs page a afficher
 		this.cards = new CardLayout();
 		
 		//Mise en place du conteneur principal
 		this.mainPanel = new JPanel();
 		this.mainPanel.setLayout(this.cards);
 		
-		//Création des différentes pages du système
+		//Creation des differentes pages du systeme
 		this.mainPanel.add(FirstPage, "FirstPage");
 		this.mainPanel.add(GestionBilletPage, "GestionBilletPage");
 		this.mainPanel.add(StatPage,"StatPage");
@@ -80,7 +81,7 @@ public class Fenetre extends JFrame {
 		this.getContentPane().add(menuBar,BorderLayout.NORTH);
 		this.getContentPane().add(this.mainPanel,BorderLayout.CENTER);
 		
-		
+		// Mettre la configuration de base
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     	this.setVisible(true);
 	}
@@ -111,8 +112,7 @@ public class Fenetre extends JFrame {
 		return this.billets;
 	}
 	/**
-	 * ActionListener pour le bouton de retour à la page de gestion 
-	 *
+	 * ActionListener pour le bouton de retour a la page de gestion
 	 */
 	class retourGestion implements ActionListener {
 
@@ -122,7 +122,7 @@ public class Fenetre extends JFrame {
 		
 	}
 	/**
-	 * ActionListener pour le bouton de retour à la page de statistique
+	 * ActionListener pour le bouton de retour a la page de statistique
 	 *
 	 */
 	class retourStat implements ActionListener {
