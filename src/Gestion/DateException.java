@@ -1,5 +1,8 @@
 package Gestion;
 
+/**
+ * Classe qui gere les exceptions generees par la date
+ */
 public class DateException extends Exception {
 
 	public DateException() {

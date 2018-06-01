@@ -1,21 +1,20 @@
 package Gestion;
-/**
- * 
- */
+
 import java.util.*;
+
 /**
  * @author hugo
- *	G�re des dates
- *	Fini
+ *	Gere des dates
  */
 public class Date {
-
+	// Variables pour stocker une date
 	private int heure;
 	private int jour;
 	private int mois;
 	private int annee;
 	private int seconde;
 	private int minute;
+
 	/**
 	 * Permet de creer une date avec des parametres
 	 */
@@ -29,11 +28,16 @@ public class Date {
 	}
 	
 	/**
-	 * Permet de creer une date a partir d'une lecture clavier
+	 * Permet de creer une date a partir d'une lecture clavier, inutile pour plus tard
 	 */
 	public Date(Scanner s){
 		keyboardEntry(s);
 	}
+
+	/**
+	 * Module qui permet une saisie clavier
+	 * @param sc
+	 */
 	public void keyboardEntry (Scanner sc) {
 		try {
 			try {
@@ -61,18 +65,21 @@ public class Date {
 			this.keyboardEntry(sc);
 		}	
 	}
+
 	/**
 	 * Afficher la date
 	 */
 	public void afficher() {
 		System.out.println("le "+this.jour+"/"+this.mois+"/"+this.annee+" a "+this.heure+"h"+this.minute+":"+this.seconde);
 	}
+
 	/**
 	 * @return the heure
 	 */
 	public int getHeure() {
 		return heure;
 	}
+
 	/**
 	 * @param heure the heure to set
 	 */
@@ -84,12 +91,14 @@ public class Date {
 			this.heure = heure;
 		}
 	}
+
 	/**
 	 * @return the jour
 	 */
 	public int getJour() {
 		return jour;
 	}
+
 	/**
 	 * @param jour the jour to set
 	 */
@@ -101,12 +110,14 @@ public class Date {
 			this.jour = jour;
 		}
 	}
+
 	/**
 	 * @return the mois
 	 */
 	public int getMois() {
 		return mois;
 	}
+
 	/**
 	 * @param mois the mois to set
 	 */
@@ -118,12 +129,14 @@ public class Date {
 			this.mois = mois;
 		}
 	}
+
 	/**
 	 * @return the annee
 	 */
 	public int getAnnee() {
 		return annee;
 	}
+
 	/**
 	 * @param annee the annee to set
 	 */
@@ -135,13 +148,14 @@ public class Date {
 			this.annee = annee;
 		}
 	}
+
 	/**
 	 * @return the seconde
 	 */
 	public int getSeconde() {
-		
 		return seconde;
 	}
+
 	/**
 	 * @param seconde the seconde to set
 	 */
@@ -153,12 +167,14 @@ public class Date {
 			this.seconde = seconde;
 		}
 	}
+
 	/**
 	 * @return the minute
 	 */
 	public int getMinute() {
 		return minute;
 	}
+
 	/**
 	 * @param minute the minute to set
 	 */
@@ -170,7 +186,11 @@ public class Date {
 			this.minute = minute;
 		}
 	}
-	
+
+	/**
+	 * Methode pour tester que toute la classe fonctionne correctement
+	 * @param args
+	 */
 	public static void main(String[] args){
 		Scanner s = new Scanner(System.in);
 		Date date = new Date(s);

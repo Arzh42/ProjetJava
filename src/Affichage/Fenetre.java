@@ -106,11 +106,12 @@ public class Fenetre extends JFrame {
 	
 	/**
 	 * Renvoie l'instance de Billets
-	 * @return
+	 * @return billets
 	 */
 	public Billets getBillets() {
 		return this.billets;
 	}
+
 	/**
 	 * ActionListener pour le bouton de retour a la page de gestion
 	 */
@@ -119,8 +120,8 @@ public class Fenetre extends JFrame {
 		public void actionPerformed(ActionEvent arg0) {
 			switchPage("GestionBilletPage");
 		}
-		
 	}
+
 	/**
 	 * ActionListener pour le bouton de retour a la page de statistique
 	 *

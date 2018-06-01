@@ -2,14 +2,14 @@ package Gestion;
 
 
 /**
- *Repr�sente un billet de train
+ *Represente un billet de train
  */
 public class BilletTrain extends Billet {
 	private String classe;
 	private boolean sens;
 
 	/**
-	 * 
+	 * Constructeur pour un billet de train
 	 */
 	public BilletTrain(int prix,Itineraire it,String classe,boolean sens) {
 		super(prix,it);

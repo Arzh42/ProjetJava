@@ -4,14 +4,31 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Scanner;
 
+/**
+ * Classe qui gere un itineraire
+ */
 public class Itineraire {
+	// On stocke un itineraire dans un hashSet d'Etapes
 	private HashSet<Etape> EtapeSet;
+
+	/**
+	 * Constructeur d'un itineraire
+	 */
 	public Itineraire() {
 		this.EtapeSet = new HashSet<Etape>();
 	}
+
+	/**
+	 * Permet de rajouter une Etape a la suite des autres
+	 * @param etape
+	 */
 	public void ajouterEtape(Etape etape) {
 		this.EtapeSet.add(etape);
 	}
+
+	/**
+	 * Methode pour creer un itineraire avec une saisie clavier
+	 */
 	public void saisieItineraire() {
 		Scanner s = new Scanner(System.in);
 		boolean test = true;
@@ -23,6 +40,11 @@ public class Itineraire {
 			}
 		}
 	}
+
+	/**
+	 * Retourne le nombre d'Etape d'un itineraire
+	 * @return compteur
+	 */
 	public int nombreEtape() {
 		int compteur = 0;
 		Iterator<Etape> it = this.EtapeSet.iterator();
@@ -32,37 +54,58 @@ public class Itineraire {
 		}
 		return compteur;
 	}
-	
+
+	/**
+	 * Affiche un itineraire mais ne fonctionne pas ici
+ 	 */
 	public void affichageEtape() {
 		Iterator<Etape> it = this.EtapeSet.iterator();
 		while(it.hasNext()) {
 			it.next().afficher();
 		}
 	}
+
+	/**
+	 * Permet de transformer un Itineraire en String
+	 * @return affichage of the Itineraire
+	 * @throws ItineraireException
+	 */
 	public String getAffichage() throws ItineraireException {
 		Iterator<Etape> it = this.EtapeSet.iterator();
+
 		if (it.hasNext()) {
 			Etape first = it.next();
 			Etape last = first;
 			while(it.hasNext()) {
 				last = it.next();
 			}
-			return "Itinéraire de "+first.getRd1().getVille().getName()+" à "+last.getRd2().getVille().getName();
+			return "Itineraire de "+first.getRd1().getVille().getName()+" a "+last.getRd2().getVille().getName();
 		}
 		else {
-			throw new ItineraireException("Pas d'étape dans l'itinéraire");
+			throw new ItineraireException("Pas d'etape dans l'itineraire");
 		}
-		
 	}
+
+	/**
+	 * Permet d'acceder a la date de depart
+	 * @return dateDepart
+	 * @throws ItineraireException
+	 */
 	public Date dateDepart() throws ItineraireException {
 		Iterator<Etape> it = this.EtapeSet.iterator();
 		if (it.hasNext()) {
 			return it.next().getRd1().getDate();
 		}
 		else {
-			throw new ItineraireException("Pas d'élément");
+			throw new ItineraireException("Pas d'element");
 		}
 	}
+
+	/**
+	 * Permet d'acceder a la date d'arrivee
+	 * @return dateArrivee
+	 * @throws ItineraireException
+	 */
 	public Date dateArrivee() throws ItineraireException {
 		Iterator<Etape> it = this.EtapeSet.iterator();
 		if (it.hasNext()) {
@@ -73,10 +116,16 @@ public class Itineraire {
 			return tmp;	
 		}
 		else {
-			throw new ItineraireException("Pas d'élément");
+			throw new ItineraireException("Pas d'ï¿½lï¿½ment");
 
 		}
 	}
+
+	/**
+	 * Permet d'acceder a la liste des villes traversees
+	 * @return tabVille
+	 * @throws ItineraireException
+	 */
 	public ArrayList<Ville> tabVille() throws ItineraireException {
 		ArrayList<Ville> tabVille = new ArrayList<Ville>();
 		Iterator<Etape> it = this.EtapeSet.iterator();
@@ -90,10 +139,16 @@ public class Itineraire {
 			return tabVille;
 		}
 		else {
-			throw new ItineraireException("Pas d'élément");
-
+			throw new ItineraireException("Pas d'element");
 		}
 	}
+
+	/**
+	 * Permet d'avoir acces a une Etape
+	 * @param position
+	 * @return tmp
+	 * @throws ItineraireException
+	 */
 	public Etape getEtape(int position) throws ItineraireException {
 		Iterator<Etape> it = this.EtapeSet.iterator();
 		boolean find = false;
@@ -106,15 +161,21 @@ public class Itineraire {
 				i ++;
 			}
 			if (i<position) {
-				throw new ItineraireException("Elément pas trouvé");
+				throw new ItineraireException("Elï¿½ment pas trouvï¿½");
 			}
 			return tmp;
 		}
 		else {
-			throw new ItineraireException("Pas d'élément");
-
+			throw new ItineraireException("Pas d'ï¿½lï¿½ment");
 		}
 	}
+
+	/**
+	 * Permet de modifier une Etape
+	 * @param e
+	 * @param newEtape
+	 * @throws ItineraireException
+	 */
 	public void modifEtape(Etape e,Etape newEtape) throws ItineraireException {
 		Iterator<Etape> it = this.EtapeSet.iterator();
 		boolean find = false;
@@ -129,14 +190,20 @@ public class Itineraire {
 				}
 			}
 			if (!find) {
-				throw new ItineraireException("Elément pas trouvé");
+				throw new ItineraireException("Elï¿½ment pas trouvï¿½");
 			}
 		}
 		else {
-			throw new ItineraireException("Pas d'élément");
-
+			throw new ItineraireException("Pas d'ï¿½lï¿½ment");
 		}
 	}
+
+	/**
+	 * Permet de tester si deux Itineraires sont egaux
+	 * @param i1
+	 * @param i2
+	 * @return
+	 */
 	public static boolean equals(Itineraire i1,Itineraire i2) {
 		boolean test = true;
 		Iterator<Etape> it1 = i1.EtapeSet.iterator();
@@ -156,17 +223,18 @@ public class Itineraire {
 		}
 		return test;
 	}
+
 	/**
 	 * @return the etapeSet
 	 */
 	public HashSet<Etape> getEtapeSet() {
 		return EtapeSet;
 	}
+
 	/**
 	 * @param etapeSet the etapeSet to set
 	 */
 	public void setEtapeSet(HashSet<Etape> etapeSet) {
 		this.EtapeSet = etapeSet;
 	}
-
 }
